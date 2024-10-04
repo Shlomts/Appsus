@@ -1,1 +1,94 @@
  /* mail list */
+
+ .mail-list {
+    padding: 0;
+    margin: 0;
+ }
+
+ .mail-list li {
+    list-style-type: none;
+    /* background-color: bisque; */
+
+ }
+
+ .mail-preview {
+    display: grid;
+    grid-template-columns: 2em 10em 1fr 6em;
+    max-height: max-content;
+    min-height: 3em;
+    max-width: 100vw;
+    gap: 0.5em;
+    padding: 0;
+    margin: 0;
+
+    border-bottom: 1px dotted lightgray;
+ }
+
+ .mail-preview>* {
+    align-content: center;
+    padding-left: 0.75em;
+    font-size: 1em;
+    font-weight: bold;
+ }
+
+ .read{
+   background-color:rgba(211, 211, 211, 0.283);
+ }
+
+ .main-mail-data {
+    display: flex;
+    gap: 0.75em;
+
+ }
+
+ .mail-body{
+   font-weight: 100;
+ }
+
+ .main-mail-data>* {
+    align-content: center;
+    font-size: 1em;
+ }
+
+ .opt-btns,
+ .mail-date {
+    justify-self: end;
+    padding: 0.5em;
+ }
+
+ .mail-preview:hover .opt-btns {
+    display: flex;
+ }
+
+ .mail-preview:hover .mail-date {
+    display: none;
+ }
+
+ .hidden {
+    display: none;
+ }
+
+ .fa-regular.fa-star {
+    color: lightgray;
+ }
+
+ .fa-solid.fa-star {
+    color: gold;
+ }
+
+ .opt-btns {
+    gap: 0.5em;
+ }
+
+ .opt-btns button {
+    border: none;
+    min-width: 2.5em;
+    background-color: transparent;
+ }
+
+ .opt-btns button:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(211, 211, 211, 0.313);
+ }
+ 
