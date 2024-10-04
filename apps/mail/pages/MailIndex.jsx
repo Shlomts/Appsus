@@ -11,7 +11,6 @@ import { MailPreview } from "../cmps/MailPreview.jsx"
 
 export function MailIndex() {
     const [mails, setMails] = useState(null)
-    const [searchPrms, setSearchPrms] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
 
 
@@ -30,6 +29,19 @@ export function MailIndex() {
     function onSetFilterBy(filterBy) {
         setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
     }
+
+    function onRemoveMail(ev, mailId) {
+        ev.preventDefault()
+        mailService.remove(mailId)
+            .then(() => {
+                setMails(mails => mails.filter(mails => mails.id !== mailId))
+                // showSuccessMsg(`Car removed successfully!`)
+            })
+            .catch(err => {
+                console.log('Problems removing mail:', err)
+                // showErrorMsg(`Problems removing mail (${mailId})`)
+            })
+    }
     
     if (!mails) return <h1>Loading...</h1>
 
@@ -38,6 +50,7 @@ export function MailIndex() {
             <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
             <MailList
                 mails={mails}
+                onRemoveMail={onRemoveMail}
             />
         </section>
     )

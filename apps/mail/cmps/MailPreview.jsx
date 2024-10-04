@@ -1,7 +1,10 @@
 const { useEffect, useState } = React
+const { useParams, useNavigate } = ReactRouter
+const { Link } = ReactRouterDOM
+
 import { mailService } from "../services/mail.service.js"
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onRemoveMail }) {
 
     const [isStarred, setIsStarred] = useState(mail.isStarred)
     const [isRead, setIsRead] = useState(mail.isRead)
@@ -29,8 +32,7 @@ export function MailPreview({ mail }) {
         return isStarred ? 'fa-solid fa-star' : 'fa-regular fa-star'
     }
 
-    function onToggleStarred(ev) {
-        ev.preventDefault()
+    function onToggleStarred() {
 
         const currStarState = !isStarred
         setIsStarred(currStarState)
@@ -38,8 +40,6 @@ export function MailPreview({ mail }) {
         const currMailState = { ...mail, isStarred: currStarState }
 
         mailService.save(currMailState)
-            .then(mail => {
-            })
             .catch(err => {
                 console.log('err:', err)
             })
@@ -54,8 +54,7 @@ export function MailPreview({ mail }) {
 
     }
 
-    function onToggleRead(ev) {
-        ev.preventDefault()
+    function onToggleRead() {
 
         const currReadState = !isRead
         setIsRead(currReadState)
@@ -63,8 +62,6 @@ export function MailPreview({ mail }) {
         const currMailState = { ...mail, isRead: currReadState }
 
         mailService.save(currMailState)
-            .then(mail => {
-            })
             .catch(err => {
                 console.log('err:', err)
             })
@@ -74,14 +71,16 @@ export function MailPreview({ mail }) {
         <article className={getReadClass()}>
             <span className={getStarClass()} onClick={onToggleStarred}></span>
             <h2>{mail.to}</h2>
-            <section className="main-mail-data">
-                <h3>{mail.subject}</h3>
-                <p className="mail-body">{mail.body}</p>
-            </section>
+            <Link to={`/mail/${mail.id}`}>
+                <section className="main-mail-data">
+                    <h3>{mail.subject}</h3>
+                    <p className="mail-body">{mail.body}</p>
+                </section>
+            </Link>
 
             <p className="mail-date">{showDate()}</p>
             <section className="opt-btns hidden">
-                <button className="fa-regular fa-trash-can"></button>
+                <button className="fa-regular fa-trash-can" onClick={() => onRemoveMail(event, mail.id)}></button>
                 <button title="read/unread" className={getReadIcon()} onClick={onToggleRead}></button>
             </section>
 
