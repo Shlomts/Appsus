@@ -26,8 +26,8 @@ export function MailIndex() {
             })
     }
 
-    function onSetFilterBy(filterBy) {
-        setFilterBy(preFilter => ({ ...preFilter, ...filterBy }))
+    function onSetFilterBy(newFilter) {
+        setFilterBy(preFilter => ({ ...preFilter, ...newFilter }))
     }
 
     function onRemoveMail(ev, mailId) {
@@ -47,8 +47,11 @@ export function MailIndex() {
 
     return (
         <section className="mail-index">
-            {/* <MailFolderList /> */}
-            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            <MailFolderList
+                onSetFilterBy={onSetFilterBy} />
+            <MailFilter
+                filterBy={filterBy}
+                onSetFilterBy={onSetFilterBy} />
             <MailList
                 mails={mails}
                 onRemoveMail={onRemoveMail}

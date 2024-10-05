@@ -1,3 +1,5 @@
+'use strict'
+
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
@@ -35,12 +37,34 @@ function query(filterBy = {}) {
                 )
             }
             if (filterBy.isRead !== '') {
-                    mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
+                mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
 
             if (filterBy.isStarred) {
+                console.log('hi')
                 mails = mails.filter(mail => mail.isStared === filterBy.isStared)
             }
+
+            if (filterBy.folder) {
+                mails = mails.filter(mail => {
+                    if (filterBy.folder === 'inbox') {
+                        return mail
+                    }
+                    else if (filterBy.folder === 'starred') {
+                        return mail.isStarred
+                    }
+                    else if (filterBy.folder === 'sent') {
+                        return
+                    }
+                    else if (filterBy.folder === 'drafts') {
+                        return
+                    }
+                    else if (filterBy.folder === 'trash') {
+                        return
+                    }
+                })
+            }
+
             if (filterBy.labels) {
                 mails = mails.filter(mail => mail.labels === filterBy.labels)
             }
@@ -83,7 +107,7 @@ function getEmptyMail(subject = '', body = '', from = '') {
 
 function getDefaultFilter() {
     return {
-        status: 'inbox',
+        folder: 'inbox',
         txt: '',
         isRead: '',
         isStarred: null,
@@ -95,7 +119,7 @@ function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            _createMail('Miss you!', 'Would love to catch up sometimes', 'momo@momo.com'),
+            _createMail('Urgent: Assistance Needed for Family Estate!', 'Would love to catch up sometimes', 'momo@momo.com'),
             _createMail('Hate you!', 'Would hate to catch up sometimes', 'hobo@hobo.com'),
             _createMail('Give me money', 'Would love to get money', 'toto@toto.com'),
             _createMail('Papa can you hear me?', 'Its me yentel', 'yentel@yentelF.com'),

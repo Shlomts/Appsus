@@ -1,16 +1,19 @@
-const { Link } = ReactRouterDOM
 
-export function MailFolderList() {
+export function MailFolderList({ onSetFilterBy }) {
+
+    function onSelectFolder(ev) {
+        const folder = ev.target.value
+        onSetFilterBy({ folder })
+    }
 
     return (
         <nav className="mail-folder-list">
             <h2>Mail list</h2>
-            <Link to="/mail/compose"><button>+ Compose</button></Link>
-            <Link to="/mail/inbox"><button>Inbox</button></Link>
-            <Link to="/mail/starred"><button>Starred</button></Link>
-            <Link to="/mail/sent"><button>Sent</button></Link>
-            <Link to="/mail/draftes"><button>Drafts</button></Link>
-            <Link to="/mail/trash"><button>Trash</button></Link>
+            <button onClick={onSelectFolder} value="inbox">Inbox</button>
+            <button onClick={onSelectFolder} value="starred">Starred</button>
+            <button onClick={onSelectFolder} value="sent">Sent</button>
+            <button onClick={onSelectFolder} value="drafts">Drafts</button>
+            <button onClick={onSelectFolder} value="trash">Trash</button>
         </nav>
     )
 }
