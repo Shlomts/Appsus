@@ -1,5 +1,6 @@
 const { useEffect, useState } = React
 const { Link, useSearchParams } = ReactRouterDOM
+const { useParams, useNavigate } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
 import { MailCompose } from "../cmps/MailCompose.jsx"
@@ -12,7 +13,6 @@ import { MailPreview } from "../cmps/MailPreview.jsx"
 export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-
 
     useEffect(() => {
         loadMails()
@@ -42,12 +42,13 @@ export function MailIndex() {
                 // showErrorMsg(`Problems removing mail (${mailId})`)
             })
     }
-    
+
     if (!mails) return <h1>Loading...</h1>
 
     return (
         <section className="mail-index">
-            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
+            {/* <MailFolderList /> */}
+            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <MailList
                 mails={mails}
                 onRemoveMail={onRemoveMail}

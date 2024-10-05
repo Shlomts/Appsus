@@ -26,11 +26,18 @@ function query(filterBy = {}) {
         .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                mails = mails.filter(mail => regExp.test(mail.vendor))
+                mails = mails.filter(mail =>
+                    regExp.test(mail.subject)
+                    ||
+                    regExp.test(mail.body)
+                    ||
+                    regExp.test(mail.from)
+                )
             }
-            if (filterBy.isRead) {
-                mails = mails.filter(mail => mail.isRead === filterBy.isRead)
+            if (filterBy.isRead !== '') {
+                    mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
+
             if (filterBy.isStarred) {
                 mails = mails.filter(mail => mail.isStared === filterBy.isStared)
             }
@@ -78,7 +85,7 @@ function getDefaultFilter() {
     return {
         status: 'inbox',
         txt: '',
-        isRead: null,
+        isRead: '',
         isStarred: null,
         lables: []
     }
