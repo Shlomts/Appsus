@@ -13,6 +13,7 @@ import { MailPreview } from "../cmps/MailPreview.jsx"
 export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [showForm, setShowForm] = useState(false)
 
     useEffect(() => {
         loadMails()
@@ -43,10 +44,18 @@ export function MailIndex() {
             })
     }
 
+    function toggleComposeForm() {
+        setShowForm(prevShowForm => (!prevShowForm))
+    }
+
     if (!mails) return <h1>Loading...</h1>
 
     return (
         <section className="mail-index">
+            <button onClick={toggleComposeForm}>Compose</button>
+            {showForm &&
+                <MailCompose
+                    toggleComposeForm={toggleComposeForm} />}
             <MailFolderList
                 onSetFilterBy={onSetFilterBy} />
             <MailFilter

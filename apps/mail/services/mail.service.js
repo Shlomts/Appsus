@@ -54,7 +54,7 @@ function query(filterBy = {}) {
                         return mail.isStarred
                     }
                     else if (filterBy.folder === 'sent') {
-                        return
+                        return mail.sentAt
                     }
                     else if (filterBy.folder === 'drafts') {
                         return
