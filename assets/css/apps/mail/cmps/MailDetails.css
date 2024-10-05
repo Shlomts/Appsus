@@ -1,0 +1,49 @@
+.mail-header {
+    display: flex;
+    justify-content: space-between;
+    min-height: 3em;
+}
+
+.mail-header>* {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+
+
+.mail-btns>* {
+    border: none;
+    min-height: 2.5em;
+    min-width: 2.5em;
+    background-color: transparent;
+    font-size: 1em;
+}
+
+.left-header>*{
+    font-size: 2em;
+}
+
+.mail-btns>*:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(211, 211, 211, 0.313);
+}
+
+.sender-section{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.sender-section p{
+    color: lightgray;
+}
+
+.mail-details {
+    margin: 1em;
+}
+
+.mail-details p{
+    margin: 1em;
+}

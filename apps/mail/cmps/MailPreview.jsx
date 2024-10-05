@@ -2,6 +2,7 @@ const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouter
 const { Link } = ReactRouterDOM
 
+import { MailDetails } from "../pages/MailDetails.jsx"
 import { mailService } from "../services/mail.service.js"
 
 export function MailPreview({ mail, onRemoveMail }) {
@@ -28,25 +29,24 @@ export function MailPreview({ mail, onRemoveMail }) {
 
     }
 
+    function getReadIcon() {
+        return isRead ? 'fa-regular fa-envelope-open' : 'fa-solid fa-envelope'
+    }
+
     function getStarClass() {
         return isStarred ? 'fa-solid fa-star' : 'fa-regular fa-star'
     }
 
     function onToggleStarred() {
-
-        const currStarState = !isStarred
-        setIsStarred(currStarState)
-
-        const currMailState = { ...mail, isStarred: currStarState }
+        const currMailState = { ...mail, isStarred: !isStarred }
 
         mailService.save(currMailState)
+            .then(() =>
+                setIsStarred(!isStarred)
+            )
             .catch(err => {
                 console.log('err:', err)
             })
-    }
-
-    function getReadIcon() {
-        return isRead ? 'fa-regular fa-envelope-open' : 'fa-solid fa-envelope'
     }
 
     function getReadClass() {
@@ -55,13 +55,12 @@ export function MailPreview({ mail, onRemoveMail }) {
     }
 
     function onToggleRead() {
-
-        const currReadState = !isRead
-        setIsRead(currReadState)
-
-        const currMailState = { ...mail, isRead: currReadState }
+        const currMailState = { ...mail, isRead: !isRead }
 
         mailService.save(currMailState)
+            .then(() =>
+                setIsRead(!isRead)
+            )
             .catch(err => {
                 console.log('err:', err)
             })
@@ -70,7 +69,7 @@ export function MailPreview({ mail, onRemoveMail }) {
     return (
         <article className={getReadClass()}>
             <span className={getStarClass()} onClick={onToggleStarred}></span>
-            <h2>{mail.to}</h2>
+            <h2>{mail.from}</h2>
             <Link to={`/mail/${mail.id}`}>
                 <section className="main-mail-data">
                     <h3>{mail.subject}</h3>

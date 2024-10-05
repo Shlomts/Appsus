@@ -59,7 +59,7 @@ function save(mail) {
     }
 }
 
-function getEmptyMail(subject = '', body = '', to = '') {
+function getEmptyMail(subject = '', body = '', from = '') {
     return {
         createdAt: new Date(),
         subject,
@@ -67,8 +67,8 @@ function getEmptyMail(subject = '', body = '', to = '') {
         isRead: false,
         sentAt: null,
         removedAt: null,
-        from: loggedinUser.email,
-        to,
+        to: loggedinUser.email,
+        from,
         isStarred: false,
         labels: []
     }
@@ -97,8 +97,8 @@ function _createMails() {
     }
 }
 
-function _createMail(subject, body, to) {
-    const mail = getEmptyMail(subject, body, to)
+function _createMail(subject, body, from) {
+    const mail = getEmptyMail(subject, body, from)
     mail.id = utilService.makeId()
     return mail
 }
