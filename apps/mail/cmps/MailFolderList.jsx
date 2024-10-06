@@ -1,4 +1,4 @@
-export function MailFolderList({ onSetFilterBy, unreadCount }) {
+export function MailFolderList({ onSetFilterBy, unreadMailsCount }) {
     function onSelectFolder(ev) {
         const folder = ev.target.value
         onSetFilterBy({ folder })
@@ -8,7 +8,7 @@ export function MailFolderList({ onSetFilterBy, unreadCount }) {
         <nav className="mail-folder-list">
             <h2>Mail list</h2>
             <button onClick={onSelectFolder} value="inbox">
-                Inbox {unreadCount}
+                Inbox ({unreadMailsCount})
             </button>
             <button onClick={onSelectFolder} value="starred">
                 Starred

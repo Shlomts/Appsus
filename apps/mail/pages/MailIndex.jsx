@@ -13,10 +13,15 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [showForm, setShowForm] = useState(false)
+    const [unreadMailsCount, setUnreadMailsCount] = useState(0)
 
     useEffect(() => {
         loadMails()
     }, [filterBy])
+
+    useEffect(() => {
+        countUnreads()
+    }, [mails])
 
     function loadMails() {
         mailService
@@ -56,6 +61,10 @@ export function MailIndex() {
             mailService
                 .save(newMail)
                 .then(setMails(mails))
+                .then(() => {
+                    loadMails()
+                    // showSuccessMsg(`Car removed successfully!`)
+                })
                 .catch((err) => {
                     console.log("err:", err)
                 })
@@ -67,20 +76,15 @@ export function MailIndex() {
         setShowForm((prevShowForm) => !prevShowForm)
     }
 
-    if (!mails) return <h1>Loading...</h1>
-
-    const unreadCount = countUnreads()
-
     function countUnreads() {
-        let count = 0
-        if (!mails) return 0
+        if (!mails) return <h1>Loading...</h1>
 
-        for (let i = 0; i < mails.length; i++) {
-            if (!mails[i].isRead) count++
-        }
+        const newUnreadCount = mails.filter((mail) => mail.isRead === false)
 
-        return count
+        setUnreadMailsCount(newUnreadCount.length)
     }
+
+    if (!mails) return <h1>Loading...</h1>
 
     return (
         <section className="mail-index">
@@ -88,11 +92,14 @@ export function MailIndex() {
             {showForm && <MailCompose toggleComposeForm={toggleComposeForm} />}
             <MailFolderList
                 onSetFilterBy={onSetFilterBy}
-                unreadCount={unreadCount}
+                unreadMailsCount={unreadMailsCount}
             />
             <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-            {/* <p className="unread-count">Unread: {unreadCount}</p> */}
-            <MailList mails={mails} onRemoveMail={onRemoveMail} />
+            <MailList
+                mails={mails}
+                onRemoveMail={onRemoveMail}
+                setUnreadMailsCount={setUnreadMailsCount}
+            />
         </section>
     )
 }

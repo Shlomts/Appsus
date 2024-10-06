@@ -48,7 +48,7 @@ function query(filterBy = {}) {
             if (filterBy.folder) {
                 mails = mails.filter(mail => {
                     if (filterBy.folder === 'inbox') {
-                        return mail
+                        return !mail.removedAt && !mail.sentAt && !mail.isDraft
                     }
                     else if (filterBy.folder === 'starred') {
                         return mail.isStarred
@@ -57,7 +57,7 @@ function query(filterBy = {}) {
                         return mail.sentAt
                     }
                     else if (filterBy.folder === 'drafts') {
-                        return
+                        return mail.isDraft
                     }
                     else if (filterBy.folder === 'trash') {
                         return mail.removedAt
@@ -96,6 +96,7 @@ function getEmptyMail(subject = '', body = '', from = '') {
         subject,
         body,
         isRead: false,
+        isDraft: false,
         sentAt: null,
         removedAt: null,
         to: loggedinUser.email,

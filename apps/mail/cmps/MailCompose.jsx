@@ -35,6 +35,24 @@ export function MailCompose({ toggleComposeForm }) {
             })
     }
 
+    function onDraft(ev) {
+        // ev.preventDefault()
+        const newComposeMail = { ...composeMail, isDraft: true }
+
+        mailService
+            .save(newComposeMail)
+            .then((composeMail) => {
+                setComposeMail(composeMail)
+                console.log("onsendmail:", composeMail)
+            })
+            .catch((err) => {
+                console.log("err:", err)
+            })
+            .finally(() => {
+                // toggleComposeForm()
+            })
+    }
+
     return (
         <form onSubmit={onSendMail} className="compose-form">
             <header className="header">
@@ -42,6 +60,7 @@ export function MailCompose({ toggleComposeForm }) {
                 <button
                     onClick={(ev) => {
                         ev.preventDefault
+                        onDraft()
                         toggleComposeForm()
                     }}
                     className="fa-solid fa-xmark"

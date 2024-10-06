@@ -5,7 +5,7 @@ const { Link } = ReactRouterDOM
 import { MailDetails } from "../pages/MailDetails.jsx"
 import { mailService } from "../services/mail.service.js"
 
-export function MailPreview({ mail, onRemoveMail }) {
+export function MailPreview({ mail, onRemoveMail, setUnreadMailsCount }) {
 
     const [isStarred, setIsStarred] = useState(mail.isStarred)
     const [isRead, setIsRead] = useState(mail.isRead)
@@ -59,7 +59,8 @@ export function MailPreview({ mail, onRemoveMail }) {
 
         mailService.save(currMailState)
             .then(() =>
-                setIsRead(!isRead)
+                setIsRead(!isRead),
+                setUnreadMailsCount(prevCount => !currMailState.isRead ? prevCount + 1 : prevCount - 1)
             )
             .catch(err => {
                 console.log('err:', err)
