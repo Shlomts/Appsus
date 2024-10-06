@@ -60,7 +60,7 @@ function query(filterBy = {}) {
                         return
                     }
                     else if (filterBy.folder === 'trash') {
-                        return
+                        return mail.removedAt
                     }
                 })
             }
