@@ -1,0 +1,22 @@
+.mail-index{
+    /* background-color: white; */
+    /* background-color: #f5f5f5; */
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+.mail-list{
+    /* background-color: #e4e4e4; */
+}
+
+.mail-filter{
+    /* background-color: chocolate; */
+}
+
+.mail-folder-list{
+    /* background-color: darkgreen; */
+}
+
+.mail-compose{
+    /* background-color: palevioletred; */
+}

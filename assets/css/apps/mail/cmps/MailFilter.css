@@ -1,0 +1,9 @@
+.mail-filter{
+    display: flex;
+    align-items: center;
+}
+
+
+.mail-filter button {
+    /* display: block;   */
+}

@@ -6,7 +6,6 @@ export function MailFolderList({ onSetFilterBy, unreadMailsCount }) {
 
     return (
         <nav className="mail-folder-list">
-            <h2>Mail list</h2>
             <button onClick={onSelectFolder} value="inbox">
                 Inbox ({unreadMailsCount})
             </button>

@@ -12,6 +12,7 @@ import { MailPreview } from "../cmps/MailPreview.jsx"
 export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    // const [soryBy, setSoryBy] = useState(mailService.getDefaultSort())
     const [showForm, setShowForm] = useState(false)
     const [unreadMailsCount, setUnreadMailsCount] = useState(0)
 
@@ -90,11 +91,11 @@ export function MailIndex() {
         <section className="mail-index">
             <button onClick={toggleComposeForm}>Compose</button>
             {showForm && <MailCompose toggleComposeForm={toggleComposeForm} />}
+            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <MailFolderList
                 onSetFilterBy={onSetFilterBy}
                 unreadMailsCount={unreadMailsCount}
             />
-            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <MailList
                 mails={mails}
                 onRemoveMail={onRemoveMail}
