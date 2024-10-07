@@ -1,10 +1,10 @@
-import { mailService } from "../services/mail.service.js"
+import { mailService, loggedinUser } from "../services/mail.service.js"
 const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouterDOM
 
 export function MailCompose({ toggleComposeForm }) {
     const [composeMail, setComposeMail] = useState(mailService.getEmptyMail())
-    const { to, subject, body, sentAt } = composeMail
+    const { to, subject, body, from } = composeMail
 
     function handleChange({ target }) {
         const field = target.name
@@ -19,7 +19,7 @@ export function MailCompose({ toggleComposeForm }) {
 
     function onSendMail(ev) {
         ev.preventDefault()
-        const newComposeMail = { ...composeMail, sentAt: new Date() }
+        const newComposeMail = { ...composeMail, sentAt: new Date(), from: loggedinUser.email }
 
         mailService
             .save(newComposeMail)
@@ -68,7 +68,7 @@ export function MailCompose({ toggleComposeForm }) {
             </header>
             <label htmlFor="to">
                 <input
-                    valule={to}
+                    value={to}
                     onChange={handleChange}
                     type="mail"
                     name="to"
@@ -77,7 +77,7 @@ export function MailCompose({ toggleComposeForm }) {
             </label>
             <label htmlFor="subject">
                 <input
-                    valule={subject}
+                    value={subject}
                     onChange={handleChange}
                     type="text"
                     name="subject"
@@ -86,7 +86,7 @@ export function MailCompose({ toggleComposeForm }) {
             </label>
             <label htmlFor="body">
                 <input
-                    valule={body}
+                    value={body}
                     onChange={handleChange}
                     type="text"
                     name="body"

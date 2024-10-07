@@ -67,10 +67,14 @@ export function MailPreview({ mail, onRemoveMail, setUnreadMailsCount }) {
             })
     }
 
+    function showSender() {
+        return mail.sentAt ? mail.to : mail.from
+    }
+
     return (
         <article className={getReadClass()}>
             <span className={getStarClass()} onClick={onToggleStarred}></span>
-            <h2>{mail.from}</h2>
+            <h2>{showSender()}</h2>
             <Link to={`/mail/${mail.id}`}>
                 <section className="main-mail-data">
                     <h3>{mail.subject}</h3>

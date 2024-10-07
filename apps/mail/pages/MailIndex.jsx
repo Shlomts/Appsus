@@ -1,6 +1,6 @@
 const { useEffect, useState } = React
 const { Link, useSearchParams } = ReactRouterDOM
-const { useParams, useNavigate } = ReactRouter
+const { useParams, useNavigate, outlet } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
 import { MailCompose } from "../cmps/MailCompose.jsx"
@@ -18,7 +18,7 @@ export function MailIndex() {
 
     useEffect(() => {
         loadMails()
-    }, [filterBy, sortBy])
+    }, [filterBy, sortBy, mails])
 
     useEffect(() => {
         countUnreads()
@@ -103,6 +103,7 @@ export function MailIndex() {
                 mails={mails}
                 onRemoveMail={onRemoveMail}
                 setUnreadMailsCount={setUnreadMailsCount}
+
             />
         </section>
     )

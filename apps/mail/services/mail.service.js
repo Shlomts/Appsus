@@ -5,7 +5,7 @@ import { storageService } from '../../../services/async-storage.service.js'
 
 
 const MAIL_KEY = 'mailDB'
-const loggedinUser = {
+export const loggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
 }
@@ -21,7 +21,7 @@ export const mailService = {
     getDefaultFilter,
     getFilterFromSearchParams,
     debounce,
-    getDefaultSort
+    getDefaultSort,
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -100,7 +100,7 @@ function save(mail) {
     }
 }
 
-function getEmptyMail(subject = '', body = '', from = '') {
+function getEmptyMail(subject = '', body = '', from = '', to = '') {
     return {
         createdAt: new Date(),
         subject,
@@ -109,7 +109,7 @@ function getEmptyMail(subject = '', body = '', from = '') {
         isDraft: false,
         sentAt: null,
         removedAt: null,
-        to: loggedinUser.email,
+        to,
         from,
         isStarred: false,
         labels: []
