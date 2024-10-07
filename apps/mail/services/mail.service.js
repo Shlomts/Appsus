@@ -71,13 +71,13 @@ function query(filterBy = {}, sortBy = {}) {
             }
 
             if (sortBy.createdAt !== undefined) {
-                mails.sort((p1, p2) => (p1.createdAt - p2.createdAt) * sortBy.createdAt)
+                mails.sort((mail1, mail2) => (mail1.createdAt - mail2.createdAt) * sortBy.createdAt)
             }
 
             if (sortBy.subject !== undefined) {
-                mails.sort((p1, p2) => p1.subject.localeCompare(p2.subject) * sortBy.subject)
+                mails.sort((mail1, mail2) => mail1.subject.localeCompare(mail2.subject) * sortBy.subject)
             }
-            
+
             return mails
         })
 }
@@ -129,7 +129,7 @@ function getDefaultFilter() {
 function getDefaultSort() {
     return {
         createdAt,
-        subject
+        subject,
     }
 }
 

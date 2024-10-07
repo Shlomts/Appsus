@@ -12,13 +12,13 @@ import { MailPreview } from "../cmps/MailPreview.jsx"
 export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-    // const [soryBy, setSoryBy] = useState(mailService.getDefaultSort())
+    const [sortBy, setSortBy] = useState({ createdAt: -1 })
     const [showForm, setShowForm] = useState(false)
     const [unreadMailsCount, setUnreadMailsCount] = useState(0)
 
     useEffect(() => {
         loadMails()
-    }, [filterBy])
+    }, [filterBy, sortBy])
 
     useEffect(() => {
         countUnreads()
@@ -26,7 +26,7 @@ export function MailIndex() {
 
     function loadMails() {
         mailService
-            .query(filterBy)
+            .query(filterBy, sortBy)
             .then(setMails)
             .catch((err) => {
                 console.log("Problem getting mails", err)
@@ -91,7 +91,10 @@ export function MailIndex() {
         <section className="mail-index">
             <button onClick={toggleComposeForm}>Compose</button>
             {showForm && <MailCompose toggleComposeForm={toggleComposeForm} />}
-            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            <MailFilter
+                filterBy={filterBy}
+                onSetFilterBy={onSetFilterBy}
+                setSortBy={setSortBy} />
             <MailFolderList
                 onSetFilterBy={onSetFilterBy}
                 unreadMailsCount={unreadMailsCount}
