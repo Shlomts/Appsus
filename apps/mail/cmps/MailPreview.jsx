@@ -87,8 +87,6 @@ export function MailPreview({ mail, onRemoveMail, loadMails }) {
                 <button className="fa-regular fa-trash-can" onClick={() => onRemoveMail(event, mail.id)}></button>
                 <button title="read/unread" className={getReadIcon()} onClick={onToggleRead}></button>
             </section>
-
-
         </article>
     )
 }

@@ -1,3 +1,5 @@
+'use strict'
+
 import { utilService } from "../../../services/util.service.js"
 import { storageService } from "../../../services/async-storage.service.js"
 
@@ -28,49 +30,49 @@ function query(filterBy = {}, sortBy = {}) {
                     regExp.test(note.from)
             )
         }
-        // if (filterBy.isRead !== "") {
-        //     notes = notes.filter(
-        //         (note) => note.isRead === (filterBy.isRead === "true")
-        //     )
-        // }
+        if (filterBy.isRead !== "") {
+            notes = notes.filter(
+                (note) => note.isRead === (filterBy.isRead === "true")
+            )
+        }
 
-        // if (filterBy.isStarred) {
-        //     notes = notes.filter((note) => note.isStared === filterBy.isStared)
-        // }
+        if (filterBy.isStarred) {
+            notes = notes.filter((note) => note.isStared === filterBy.isStared)
+        }
 
-        // if (filterBy.folder) {
-        //     notes = notes.filter((note) => {
-        //         if (filterBy.folder === "inbox") {
-        //             return !note.removedAt && !note.sentAt && !note.isDraft
-        //         } else if (filterBy.folder === "starred") {
-        //             return note.isStarred
-        //         } else if (filterBy.folder === "sent") {
-        //             return note.sentAt && !note.removedAt
-        //         } else if (filterBy.folder === "drafts") {
-        //             return note.isDraft && !note.removedAt
-        //         } else if (filterBy.folder === "trash") {
-        //             return note.removedAt
-        //         }
-        //     })
-        // }
+        if (filterBy.folder) {
+            notes = notes.filter((note) => {
+                if (filterBy.folder === "inbox") {
+                    return !note.removedAt && !note.sentAt && !note.isDraft
+                } else if (filterBy.folder === "starred") {
+                    return note.isStarred
+                } else if (filterBy.folder === "sent") {
+                    return note.sentAt && !note.removedAt
+                } else if (filterBy.folder === "drafts") {
+                    return note.isDraft && !note.removedAt
+                } else if (filterBy.folder === "trash") {
+                    return note.removedAt
+                }
+            })
+        }
 
-        // if (filterBy.labels) {
-        //     notes = notes.filter((note) => note.labels === filterBy.labels)
-        // }
+        if (filterBy.labels) {
+            notes = notes.filter((note) => note.labels === filterBy.labels)
+        }
 
-        // if (sortBy.createdAt !== undefined) {
-        //     notes.sort(
-        //         (note1, note2) =>
-        //             (note1.createdAt - note2.createdAt) * sortBy.createdAt
-        //     )
-        // }
+        if (sortBy.createdAt !== undefined) {
+            notes.sort(
+                (note1, note2) =>
+                    (note1.createdAt - note2.createdAt) * sortBy.createdAt
+            )
+        }
 
-        // if (sortBy.subject !== undefined) {
-        //     notes.sort(
-        //         (note1, note2) =>
-        //             note1.subject.localeCompare(note2.subject) * sortBy.subject
-        //     )
-        // }
+        if (sortBy.subject !== undefined) {
+            notes.sort(
+                (note1, note2) =>
+                    note1.subject.localeCompare(note2.subject) * sortBy.subject
+            )
+        }
 
         return notes
     })
