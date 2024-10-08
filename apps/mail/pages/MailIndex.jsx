@@ -16,15 +16,14 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState({ createdAt: -1 })
     const [showForm, setShowForm] = useState(false)
     const [unreadMailsCount, setUnreadMailsCount] = useState(0)
-
+    
     useEffect(() => {
         loadMails()
-        countUnreads()
-    }, [filterBy, sortBy, mails])
+    }, [filterBy, sortBy])
 
-    // useEffect(() => {
-    //     countUnreads()
-    // }, [mails])
+    useEffect(() => {
+        countUnreads()
+    }, [mails])
 
     function loadMails() {
         mailService
@@ -111,7 +110,7 @@ export function MailIndex() {
             <MailList
                 mails={mails}
                 onRemoveMail={onRemoveMail}
-                setUnreadMailsCount={setUnreadMailsCount}
+                loadMails={loadMails}
             />
         </section>
     )

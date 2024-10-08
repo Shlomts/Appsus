@@ -1,1 +1,186 @@
-// note service
+import { utilService } from "../../../services/util.service.js"
+import { storageService } from "../../../services/async-storage.service.js"
+
+const NOTE_KEY = "noteDB"
+
+_createNotes()
+
+export const noteService = {
+    query,
+    get,
+    remove,
+    save,
+    getEmptyNote,
+    getDefaultFilter,
+    getFilterFromSearchParams,
+    getDefaultSort,
+    debounce,
+}
+
+function query(filterBy = {}, sortBy = {}) {
+    return storageService.query(NOTE_KEY).then((notes) => {
+        if (filterBy.txt) {
+            const regExp = new RegExp(filterBy.txt, "i")
+            notes = notes.filter(
+                (note) =>
+                    regExp.test(note.subject) ||
+                    regExp.test(note.body) ||
+                    regExp.test(note.from)
+            )
+        }
+        // if (filterBy.isRead !== "") {
+        //     notes = notes.filter(
+        //         (note) => note.isRead === (filterBy.isRead === "true")
+        //     )
+        // }
+
+        // if (filterBy.isStarred) {
+        //     notes = notes.filter((note) => note.isStared === filterBy.isStared)
+        // }
+
+        // if (filterBy.folder) {
+        //     notes = notes.filter((note) => {
+        //         if (filterBy.folder === "inbox") {
+        //             return !note.removedAt && !note.sentAt && !note.isDraft
+        //         } else if (filterBy.folder === "starred") {
+        //             return note.isStarred
+        //         } else if (filterBy.folder === "sent") {
+        //             return note.sentAt && !note.removedAt
+        //         } else if (filterBy.folder === "drafts") {
+        //             return note.isDraft && !note.removedAt
+        //         } else if (filterBy.folder === "trash") {
+        //             return note.removedAt
+        //         }
+        //     })
+        // }
+
+        // if (filterBy.labels) {
+        //     notes = notes.filter((note) => note.labels === filterBy.labels)
+        // }
+
+        // if (sortBy.createdAt !== undefined) {
+        //     notes.sort(
+        //         (note1, note2) =>
+        //             (note1.createdAt - note2.createdAt) * sortBy.createdAt
+        //     )
+        // }
+
+        // if (sortBy.subject !== undefined) {
+        //     notes.sort(
+        //         (note1, note2) =>
+        //             note1.subject.localeCompare(note2.subject) * sortBy.subject
+        //     )
+        // }
+
+        return notes
+    })
+}
+
+function get(noteId) {
+    return storageService
+        .get(NOTE_KEY, noteId)
+        .then((note) => _setNextPrevNoteId(note))
+}
+
+function remove(noteId) {
+    // return Promise.reject('Oh No!')
+    return storageService.remove(NOTE_KEY, noteId)
+}
+
+function save(note) {
+    if (note.id) {
+        return storageService.put(NOTE_KEY, note)
+    } else {
+        return storageService.post(NOTE_KEY, note)
+    }
+}
+
+function _createNotes() {
+    let notes = utilService.loadFromStorage(NOTE_KEY)
+    if (!notes || !notes.length) {
+        notes = [
+            _createNote(
+                "Fullstack Me Baby!"
+            ),
+            _createNote(
+                "Hate you!"
+            ),
+            _createNote(
+                "Give me money"
+            ),
+            _createNote(
+                "Papa can you hear me?"
+            ),
+        ]
+        utilService.saveToStorage(NOTE_KEY, notes)
+    }
+}
+
+function _createNote(txt) {
+    const note = getEmptyNote(txt)
+    note.id = utilService.makeId()
+    return note
+}
+
+function getEmptyNote(txt = " ") {
+    return {
+        createdAt: new Date(),
+        type: "NoteTxt",
+        isPinned: false,
+        style: {
+            backgroundColor: "#00d",
+        },
+        info: {
+            txt,
+        },
+    }
+}
+
+function getDefaultFilter() {
+    return {
+        folder: "inbox",
+        txt: "",
+        isRead: "",
+        isStarred: null,
+        lables: [],
+    }
+}
+
+function getDefaultSort() {
+    return {
+        createdAt,
+        subject,
+    }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const txt = searchParams.get("txt") || ""
+    const minSpeed = searchParams.get("minSpeed") || ""
+    return {
+        txt,
+        minSpeed,
+    }
+}
+
+function _setNextPrevNoteId(note) {
+    return query().then((notes) => {
+        const noteIdx = notes.findIndex((currNote) => currNote.id === note.id)
+        const nextNote = notes[noteIdx + 1] ? notes[noteIdx + 1] : notes[0]
+        const prevNote = notes[noteIdx - 1]
+            ? notes[noteIdx - 1]
+            : notes[notes.length - 1]
+        note.nextNoteId = nextNote.id
+        note.prevNoteId = prevNote.id
+        return note
+    })
+}
+
+function debounce(func, delay) {
+    let timeoutId
+    return (...args) => {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+            func(...args)
+        }, delay)
+    }
+}

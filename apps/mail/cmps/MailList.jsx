@@ -2,7 +2,7 @@
 import { MailPreview } from "./MailPreview.jsx"
 
 
-export function MailList({ mails, onRemoveMail, setUnreadMailsCount }) {
+export function MailList({ mails, onRemoveMail, loadMails }) {
     return (
         <ul className="mail-list">
             {mails.map(mail =>
@@ -10,7 +10,7 @@ export function MailList({ mails, onRemoveMail, setUnreadMailsCount }) {
                     <MailPreview
                         mail={mail}
                         onRemoveMail={onRemoveMail}
-                        // setUnreadMailsCount={setUnreadMailsCount}
+                        loadMails={loadMails}
 
                     />
                 </li>
