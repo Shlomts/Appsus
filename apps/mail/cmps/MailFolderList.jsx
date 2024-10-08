@@ -1,4 +1,7 @@
+const { useEffect, useState } = React
+
 export function MailFolderList({ onSetFilterBy, unreadMailsCount }) {
+
     function onSelectFolder(ev) {
         const folder = ev.target.value
         onSetFilterBy({ folder })

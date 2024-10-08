@@ -55,10 +55,10 @@ function query(filterBy = {}, sortBy = {}) {
                         return mail.isStarred
                     }
                     else if (filterBy.folder === 'sent') {
-                        return mail.sentAt
+                        return mail.sentAt && !mail.removedAt
                     }
                     else if (filterBy.folder === 'drafts') {
-                        return mail.isDraft
+                        return mail.isDraft && !mail.removedAt
                     }
                     else if (filterBy.folder === 'trash') {
                         return mail.removedAt

@@ -8,6 +8,7 @@ import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailPreview } from "../cmps/MailPreview.jsx"
+import { utilService } from "../../../services/util.service.js"
 
 export function MailIndex() {
     const [mails, setMails] = useState(null)
@@ -18,11 +19,12 @@ export function MailIndex() {
 
     useEffect(() => {
         loadMails()
+        countUnreads()
     }, [filterBy, sortBy, mails])
 
-    useEffect(() => {
-        countUnreads()
-    }, [mails])
+    // useEffect(() => {
+    //     countUnreads()
+    // }, [mails])
 
     function loadMails() {
         mailService
@@ -78,9 +80,15 @@ export function MailIndex() {
     }
 
     function countUnreads() {
-        if (!mails) return <h1>Loading...</h1>
+        // if (!mails) return <h1>Loading...</h1>
+        const storagedMails = utilService.loadFromStorage('mailDB')
 
-        const newUnreadCount = mails.filter((mail) => mail.isRead === false)
+
+        const newUnreadCount = storagedMails.filter((mail) => mail.isRead === false 
+        && !mail.removedAt && !mail.sentAt && !mail.isDraft)
+        
+        // const newUnreadCount = mails.filter((mail) => mail.isRead === false 
+        // && !mail.removedAt && !mail.sentAt && !mail.isDraft)
 
         setUnreadMailsCount(newUnreadCount.length)
     }
@@ -94,7 +102,8 @@ export function MailIndex() {
             <MailFilter
                 filterBy={filterBy}
                 onSetFilterBy={onSetFilterBy}
-                setSortBy={setSortBy} />
+                setSortBy={setSortBy}
+            />
             <MailFolderList
                 onSetFilterBy={onSetFilterBy}
                 unreadMailsCount={unreadMailsCount}
@@ -103,7 +112,6 @@ export function MailIndex() {
                 mails={mails}
                 onRemoveMail={onRemoveMail}
                 setUnreadMailsCount={setUnreadMailsCount}
-
             />
         </section>
     )

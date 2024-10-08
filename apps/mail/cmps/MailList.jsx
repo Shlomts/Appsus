@@ -10,7 +10,7 @@ export function MailList({ mails, onRemoveMail, setUnreadMailsCount }) {
                     <MailPreview
                         mail={mail}
                         onRemoveMail={onRemoveMail}
-                        setUnreadMailsCount={setUnreadMailsCount}
+                        // setUnreadMailsCount={setUnreadMailsCount}
 
                     />
                 </li>

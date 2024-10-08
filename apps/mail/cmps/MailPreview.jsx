@@ -60,7 +60,7 @@ export function MailPreview({ mail, onRemoveMail, setUnreadMailsCount }) {
         mailService.save(currMailState)
             .then(() =>
                 setIsRead(!isRead),
-                setUnreadMailsCount(prevCount => !currMailState.isRead ? prevCount + 1 : prevCount - 1)
+                // setUnreadMailsCount(prevCount => !currMailState.isRead ? prevCount + 1 : prevCount - 1)
             )
             .catch(err => {
                 console.log('err:', err)
