@@ -1,10 +1,8 @@
 export function NotePreview({note}) {
 
-    console.log(note)
-
     return (
         <article className="note-preview">
-            <title>New note</title>
+            <h3>{note.info.title}</h3>
             <p>{note.info.txt}</p>
         </article>
     )

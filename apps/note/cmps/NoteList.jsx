@@ -1,16 +1,19 @@
 import { NotePreview } from "../cmps/NotePreview.jsx"
 
-export function NoteList({notes}) {
+export function NoteList({notes, onRemoveNote}) {
     return (
-        <ul className="note-list">
+        <section className="note-list">
             {notes.map((note) => (
-                <li key={note.id}>
+                // console.log(note),
+                // console.log(note.id)
+                <article key={note.id}>
                     <NotePreview
                         note={note}
                         // onRemoveNote={onRemoveNote}
                     />
-                </li>
+                    <button onClick={() => onRemoveNote(note.id)}>Remove</button>
+                </article>
             ))}
-        </ul>
+        </section>
     )
 }

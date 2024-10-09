@@ -102,15 +102,19 @@ function _createNotes() {
     if (!notes || !notes.length) {
         notes = [
             _createNote(
+                "title me bitch",
                 "Fullstack Me Baby!"
             ),
             _createNote(
+                "halo",
                 "Hate you!"
             ),
             _createNote(
+                "money mezumani",
                 "Give me money"
             ),
             _createNote(
+                "yentel rocks",
                 "Papa can you hear me?"
             ),
         ]
@@ -118,21 +122,22 @@ function _createNotes() {
     }
 }
 
-function _createNote(txt) {
-    const note = getEmptyNote(txt)
+function _createNote(title, txt) {
+    const note = getEmptyNote(title, txt)
     note.id = utilService.makeId()
     return note
 }
 
-function getEmptyNote(txt = " ") {
+function getEmptyNote(title = " " ,txt = " ") {
     return {
         createdAt: new Date(),
-        type: "NoteTxt",
+        type: "txt",
         isPinned: false,
         style: {
             backgroundColor: "#00d",
         },
         info: {
+            title,
             txt,
         },
     }

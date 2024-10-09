@@ -42,7 +42,7 @@ export function MailPreview({ mail, onRemoveMail, loadMails }) {
 
         mailService.save(currMailState)
             .then(() =>
-                setIsStarred(!isStarred)
+                setIsStarred(!isStarred),
             )
             .catch(err => {
                 console.log('err:', err)
