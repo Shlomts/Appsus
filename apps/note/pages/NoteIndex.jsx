@@ -16,6 +16,7 @@ export function NoteIndex() {
     useEffect(() => {
         loadNotes()
     }, [])
+    console.log(notes)
 
     function loadNotes() {
         noteService
@@ -47,7 +48,7 @@ export function NoteIndex() {
 
     return (
         <section className="note-index">
-            <NoteCompose />
+            <NoteCompose loadNotes={loadNotes}/>
             <NoteList 
             notes={notes} 
             onRemoveNote={onRemoveNote} />
