@@ -1,7 +1,7 @@
  /* note list */
 
  .note-list{
-    background-color: #e32828;
+    /* background-color: #e32828; */
     columns: 4;
     column-gap: 20px;
     /* display: table-column; */

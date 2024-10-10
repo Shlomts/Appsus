@@ -4,12 +4,34 @@ import { noteService } from "../services/note.service.js"
 
 export function NoteCompose({ loadNotes }) {
     const [composeNote, setComposeNote] = useState(noteService.getEmptyNote())
-    const { title, txt } = composeNote
+    const [body, setBody] = useState("")
+    const [title, setTilte] = useState("")
+
+    // let body
+    // let title
+
+    // console.log("info:", info)
+    // console.log("txt", body)
+
+    useEffect(() => {
+        loadNotes()
+    }, [])
+
+    useEffect(() => {
+        setTilte("")
+        setBody("")
+    }, [composeNote])
     // console.log(composeNote)
+
+    // const [txt, setTxt] = useState('')
+    // const [title, setTilte] = useState('')
 
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
+
+        if (field === "title") setTilte(value)
+        if (field === "body") setBody(value)
 
         setComposeNote((prevComposeNote) => {
             prevComposeNote.info[field] = value
@@ -18,22 +40,19 @@ export function NoteCompose({ loadNotes }) {
     }
 
     function onSaveNote(ev) {
-        ev.preventDefault() // IS NEEDED??
-        const newComposeNote = { ...composeNote }
-        console.log("newComposeNote", newComposeNote)
+        ev.preventDefault()
         noteService
-            .save(newComposeNote)
-            .then((composeNote) => {
-                setComposeNote(composeNote)
-                // console.log("onsavenote:", composeNote)
-                loadNotes()
+            .save(composeNote)
+            .then((note) => {
+                console.log("nte", note)
             })
             .catch((err) => {
                 console.log("err:", err)
             })
             .finally(() => {
-                loadNotes()
-                // navigate('/car')
+                //             // navigate('/car')
+
+                loadNotes(), setComposeNote(noteService.getEmptyNote())
             })
     }
 
@@ -61,10 +80,10 @@ export function NoteCompose({ loadNotes }) {
             </label>
             <label htmlFor="txt">
                 <input
-                    value={txt}
+                    value={body}
                     onChange={handleChange}
                     type="text"
-                    name="txt"
+                    name="body"
                     placeholder="New note..."
                 ></input>
             </label>
