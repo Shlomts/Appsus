@@ -1,0 +1,8 @@
+ /* note preview */
+
+
+ .note-preview{
+    background-color: greenyellow;
+    min-height: 300px;
+    /* display: inline; */
+ }

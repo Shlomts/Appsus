@@ -6,7 +6,7 @@ export function NoteList({notes, onRemoveNote}) {
             {notes.map((note) => (
                 // console.log(note),
                 // console.log(note.id)
-                <article key={note.id}>
+                <article key={note.id} className="note">
                     <NotePreview
                         note={note}
                         // onRemoveNote={onRemoveNote}

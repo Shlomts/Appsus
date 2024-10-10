@@ -5,7 +5,7 @@ import { noteService } from "../services/note.service.js"
 export function NoteCompose({ loadNotes }) {
     const [composeNote, setComposeNote] = useState(noteService.getEmptyNote())
     const { title, txt } = composeNote
-    console.log(composeNote)
+    // console.log(composeNote)
 
     function handleChange({ target }) {
         const field = target.name
@@ -25,7 +25,7 @@ export function NoteCompose({ loadNotes }) {
             .save(newComposeNote)
             .then((composeNote) => {
                 setComposeNote(composeNote)
-                console.log("onsavenote:", composeNote)
+                // console.log("onsavenote:", composeNote)
                 loadNotes()
             })
             .catch((err) => {
@@ -38,7 +38,7 @@ export function NoteCompose({ loadNotes }) {
     }
 
     return (
-        <form onSubmit={onSaveNote} className="compose-note">
+        <form onSubmit={onSaveNote} className="note-compose">
             {/* <header className="header">
                     <h2>New Note</h2>
                     <button

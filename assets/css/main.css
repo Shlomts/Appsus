@@ -20,6 +20,9 @@
 
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
+
+/* Mail App */
+
 @import './apps/mail/mailLayout.css';
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/MailDetails.css';
@@ -28,5 +31,9 @@
 @import './apps/mail/cmps/MailFolderList.css';
 
 
+/* Note App */
 
+@import './apps/note/cmps/NoteCompose.css';
+@import './apps/note/cmps/NoteList.css';
+@import './apps/note/cmps/NotePreview.css';
 
