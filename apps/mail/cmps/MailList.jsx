@@ -11,7 +11,6 @@ export function MailList({ mails, onRemoveMail, loadMails }) {
                         mail={mail}
                         onRemoveMail={onRemoveMail}
                         loadMails={loadMails}
-
                     />
                 </li>
             )}

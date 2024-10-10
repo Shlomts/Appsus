@@ -5,6 +5,7 @@ const { useNavigate, useParams } = ReactRouterDOM
 export function MailCompose({ toggleComposeForm }) {
     const [composeMail, setComposeMail] = useState(mailService.getEmptyMail())
     const { to, subject, body, from } = composeMail
+    const navigate = useNavigate()
 
     function handleChange({ target }) {
         const field = target.name
@@ -35,9 +36,9 @@ export function MailCompose({ toggleComposeForm }) {
             })
     }
 
-    function onDraft(ev) {
-        // ev.preventDefault()
-        const newComposeMail = { ...composeMail, isDraft: true }
+    function onDraft() {
+        const newComposeMail =
+            { ...composeMail, isDraft: true}
 
         mailService
             .save(newComposeMail)
@@ -59,47 +60,49 @@ export function MailCompose({ toggleComposeForm }) {
                 <h2>New Message</h2>
                 <button
                     onClick={(ev) => {
-                        ev.preventDefault
-                        onDraft()
+                        ev.preventDefault()
                         toggleComposeForm()
+                        onDraft()
                     }}
                     className="fa-solid fa-xmark"
                 ></button>
             </header>
-            <label htmlFor="to">
-                <input
-                    value={to}
-                    onChange={handleChange}
-                    type="mail"
-                    name="to"
-                    placeholder="Recipients"
-                ></input>
-            </label>
-            <label htmlFor="subject">
-                <input
-                    value={subject}
-                    onChange={handleChange}
-                    type="text"
-                    name="subject"
-                    placeholder="Subject"
-                ></input>
-            </label>
-            <label htmlFor="body">
-                <input
-                    value={body}
-                    onChange={handleChange}
-                    type="text"
-                    name="body"
-                    placeholder="Write something.."
-                ></input>
-            </label>
+            <section className="compose-body">
+                <label htmlFor="to">
+                    <input
+                        value={to}
+                        onChange={handleChange}
+                        type="mail"
+                        name="to"
+                        placeholder="Recipients"
+                    ></input>
+                </label>
+                <label htmlFor="subject">
+                    <input
+                        value={subject}
+                        onChange={handleChange}
+                        type="text"
+                        name="subject"
+                        placeholder="Subject"
+                    ></input>
+                </label>
+                <label htmlFor="body">
+                    <textarea
+                        value={body}
+                        onChange={handleChange}
+                        type="text"
+                        name="body"
+                    ></textarea>
+                </label>
+            </section>
             <footer className="footer">
-                <button>Send</button>
+                <button className="send-btn">Send</button>
                 <button
                     className="fa-regular fa-trash-can"
                     onClick={(ev) => {
-                        ev.preventDefault
+                        ev.preventDefault()
                         toggleComposeForm()
+                        navigate("/mail")
                     }}
                 ></button>
             </footer>

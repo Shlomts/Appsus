@@ -16,7 +16,7 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState({ createdAt: -1 })
     const [showForm, setShowForm] = useState(false)
     const [unreadMailsCount, setUnreadMailsCount] = useState(0)
-    
+
     useEffect(() => {
         loadMails()
     }, [filterBy, sortBy])
@@ -41,28 +41,22 @@ export function MailIndex() {
     function onRemoveMail(ev, mailId) {
         ev.preventDefault()
 
-        const mail = mails.filter((mails) => mails.id === mailId)[0]
+        const mail = mails.find((mail) => mail.id === mailId)
 
         if (mail.removedAt) {
             mailService
                 .remove(mailId)
-                .then(() => {
-                    setMails((mails) =>
-                        mails.filter((mails) => mails.id !== mailId)
-                    )
+                .then(() =>
+                    setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
                     // showSuccessMsg(`Car removed successfully!`)
-                })
-                .catch((err) => {
-                    console.log("Problems removing mail:", err)
+                )
+                .catch(err => console.log("Problems removing mail:", err)
                     // showErrorMsg(`Problems removing mail (${mailId})`)
-                })
+                )
         } else {
-            mail.removedAt = new Date()
-
             const newMail = { ...mail, removedAt: new Date() }
             mailService
                 .save(newMail)
-                .then(setMails(mails))
                 .then(() => {
                     loadMails()
                     // showSuccessMsg(`Car removed successfully!`)
@@ -70,7 +64,6 @@ export function MailIndex() {
                 .catch((err) => {
                     console.log("err:", err)
                 })
-            console.log(`done`)
         }
     }
 
@@ -79,15 +72,12 @@ export function MailIndex() {
     }
 
     function countUnreads() {
-        // if (!mails) return <h1>Loading...</h1>
+        if (!mails) return
+
         const storagedMails = utilService.loadFromStorage('mailDB')
 
-
-        const newUnreadCount = storagedMails.filter((mail) => mail.isRead === false 
-        && !mail.removedAt && !mail.sentAt && !mail.isDraft)
-        
-        // const newUnreadCount = mails.filter((mail) => mail.isRead === false 
-        // && !mail.removedAt && !mail.sentAt && !mail.isDraft)
+        const newUnreadCount = storagedMails.filter((mail) => mail.isRead === false
+            && !mail.removedAt && !mail.sentAt && !mail.isDraft)
 
         setUnreadMailsCount(newUnreadCount.length)
     }
@@ -96,7 +86,9 @@ export function MailIndex() {
 
     return (
         <section className="mail-index">
-            <button onClick={toggleComposeForm}>Compose</button>
+            <button className="compose-btn" onClick={toggleComposeForm}>
+                <span className="fa-solid fa-pen"></span>
+                Compose</button>
             {showForm && <MailCompose toggleComposeForm={toggleComposeForm} />}
             <MailFilter
                 filterBy={filterBy}

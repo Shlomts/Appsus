@@ -41,9 +41,8 @@ function query(filterBy = {}, sortBy = {}) {
                 mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
 
-            if (filterBy.isStarred) {
-                console.log('hi')
-                mails = mails.filter(mail => mail.isStared === filterBy.isStared)
+            if (filterBy.isStarred !== null) {
+                mails = mails.filter(mail => mail.isStarred === filterBy.isStarred)
             }
 
             if (filterBy.folder) {

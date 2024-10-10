@@ -1,6 +1,6 @@
 .compose-form {
-    min-width: 30vw;
-    min-height: 40vw;
+    min-width: 26vw;
+    min-height: 60vh;
 
     position: absolute;
     bottom: 0;
@@ -11,4 +11,105 @@
     -moz-box-shadow: 0px 1px 8px 6px rgba(230, 230, 230, 1);
     box-shadow: 0px 1px 8px 6px rgba(230, 230, 230, 1);
     background-color: white;
+
+    font-size: 14px;
+
+}
+
+.compose-form .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 40px;
+
+    background-color: var(--compose-head-bg);
+    color: #202124;
+}
+
+.header h2 {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: roboto-regular;
+    margin-inline-start: 16px;
+}
+
+.header button {
+    border: none;
+    background-color: transparent;
+    margin-inline-end: 8px;
+}
+
+.header button:hover {
+    cursor: pointer;
+}
+
+.compose-form .compose-body {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.compose-body input {
+    min-width: 487px;
+    min-height: 40px;
+
+    margin-inline: 16px;
+
+    border: none;
+    border-bottom: 1px solid #d8dce2;
+    outline: none;
+
+
+}
+
+.compose-body textarea {
+    min-height: 320px;
+    min-width: 487px;
+
+    margin-block: 10px;
+
+    border: none;
+    outline: none;
+
+}
+
+.compose-form footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-inline: 16px;
+
+    min-height: 60px;
+}
+
+.footer button {
+    border: none;
+    background-color: transparent;
+}
+
+.footer button:hover {
+    cursor: pointer;
+}
+
+.footer .send-btn {
+    border-radius: 25px;
+    border: 1px solid transparent;
+
+
+    min-width: 105px;
+    min-height: 36px;
+
+    background-color: #0b57d0;
+    color: white;
+
+    font-size: 14px;
+    font-family: roboto-regular;
+
+}
+
+.footer .send-btn:hover{
+    background-color: #2f7cf8;
 }

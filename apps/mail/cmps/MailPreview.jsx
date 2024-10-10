@@ -75,7 +75,7 @@ export function MailPreview({ mail, onRemoveMail, loadMails }) {
         <article className={getReadClass()}>
             <span className={getStarClass()} onClick={onToggleStarred}></span>
             <h2>{showSender()}</h2>
-            <Link to={`/mail/${mail.id}`}>
+            <Link to={`/mail/${mail.id}`} key={mail.id}>
                 <section className="main-mail-data">
                     <h3>{mail.subject}</h3>
                     <p className="mail-body">{mail.body}</p>

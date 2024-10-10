@@ -16,13 +16,17 @@ export function MailDetails() {
 
 
     function loadMail() {
+        console.log('parmsmailsid:', params.mailId)
         mailService.get(params.mailId)
             .then((currMail) => {
+                console.log('currmail in then:', currMail)
                 currMail.isRead = true
                 return mailService.save(currMail)
             })
             .then(setMail)
             .catch(() => {
+                console.log(params.mailId)
+                console.log('couldnt find mail')
                 // showErrorMsg('Couldnt get mail...')
                 navigate(`/mail`)
             })
