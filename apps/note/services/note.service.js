@@ -128,7 +128,7 @@ function _createNote(title, txt) {
     return note
 }
 
-function getEmptyNote(title = " " ,txt = " ") {
+function getEmptyNote(title = " " ,body = " ") {
     return {
         createdAt: new Date(),
         type: "txt",
@@ -138,7 +138,7 @@ function getEmptyNote(title = " " ,txt = " ") {
         },
         info: {
             title,
-            txt,
+            body,
         },
     }
 }
