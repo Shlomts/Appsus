@@ -7,7 +7,7 @@ import { MailCompose } from "../cmps/MailCompose.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
 import { MailList } from "../cmps/MailList.jsx"
-import { MailPreview } from "../cmps/MailPreview.jsx"
+import { MailDetails } from "../pages/MailDetails.jsx"
 import { utilService } from "../../../services/util.service.js"
 
 export function MailIndex() {
@@ -16,6 +16,8 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState({ createdAt: -1 })
     const [showForm, setShowForm] = useState(false)
     const [unreadMailsCount, setUnreadMailsCount] = useState(0)
+    const params = useParams()
+    const mailId = params.mailId
 
     useEffect(() => {
         loadMails()
@@ -99,11 +101,17 @@ export function MailIndex() {
                 onSetFilterBy={onSetFilterBy}
                 unreadMailsCount={unreadMailsCount}
             />
-            <MailList
-                mails={mails}
-                onRemoveMail={onRemoveMail}
-                loadMails={loadMails}
-            />
+            {mailId ? (
+                <MailDetails
+                    mailId={mailId}
+                />
+            ) : (
+                <MailList
+                    mails={mails}
+                    onRemoveMail={onRemoveMail}
+                    loadMails={loadMails}
+                />
+            )}
         </section>
     )
 }

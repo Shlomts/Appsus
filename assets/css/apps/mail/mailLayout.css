@@ -1,6 +1,4 @@
 .mail-index {
-    /* background-color: white; */
-    /* background-color: #f5f5f5; */
     display: grid;
     grid-template-columns: 14vw 6fr 3vw;
     background-color: var(--main-bg-color);
@@ -11,16 +9,13 @@
     background-color: white;
 }
 
-.mail-filter {
-    /* background-color: chocolate; */
-}
-
 .mail-folder-list {
     grid-column: 1/2;
 }
 
-.mail-compose {
-    /* background-color: palevioletred; */
+.mail-details {
+    border-radius: 20px;
+    background-color: #ffffff;
 }
 
 .compose-btn {
@@ -43,5 +38,10 @@
 .compose-btn:hover {
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px,
-                rgba(0, 0, 0, 0.14) 0px 1px 3px 1px;
+        rgba(0, 0, 0, 0.14) 0px 1px 3px 1px;
+}
+
+.compose-btn span {
+    margin-inline-end: 10px;
+
 }

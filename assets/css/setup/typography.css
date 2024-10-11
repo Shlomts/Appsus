@@ -2,3 +2,8 @@
     font-family: roboto-regular;
     src: url(/Appsus/assets/fonts/Roboto-Regular.ttf);
   }
+
+  @font-face {
+    font-family: roboto-bold;
+    src: url(/Appsus/assets/fonts/Roboto-Bold.ttf);
+  }

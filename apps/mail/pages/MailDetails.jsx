@@ -1,6 +1,5 @@
 const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouter
-const { Link } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 
@@ -22,7 +21,6 @@ export function MailDetails() {
             })
             .then(setMail)
             .catch(() => {
-                console.log("couldnt find mail", params.mailId)
                 // showErrorMsg('Couldnt get mail...')
                 navigate(`/mail`)
             })
@@ -54,35 +52,29 @@ export function MailDetails() {
 
     return (
         <article className="mail-details">
-            <section className="mail-header">
-                <section className="left-header">
-                    <h2>{mail.subject}</h2>
-                    <h3>{mail.to}</h3>
-                    <h4>{mail.from}</h4>
-                    <p>{mail.subject}</p>
-                </section>
-                <section className="mail-btns">
-                    <button
-                        title="return"
-                        className="fa-solid fa-arrow-left"
-                        onClick={onBack}
-                    ></button>
-                    <button
-                        title="save as note"
-                        className="fa-solid fa-paper-plane"
-                    ></button>
-                    <button
-                        title="delete"
-                        className="fa-regular fa-trash-can"
-                        onClick={onRemoveMail}
-                    ></button>
-                </section>
+            <section className="mail-btns">
+                <button
+                    title="return"
+                    className="fa-solid fa-arrow-left"
+                    onClick={onBack}
+                ></button>
+                <button
+                    title="save as note"
+                    className="fa-solid fa-paper-plane"
+                ></button>
+                <button
+                    title="delete"
+                    className="fa-regular fa-trash-can"
+                    onClick={onRemoveMail}
+                ></button>
             </section>
+            <h2 className="mail-subject">{mail.subject}</h2>
             <section className="sender-section">
+                <span className="sender-circle">{mail.from.charAt(0)}</span>
                 <h3>{getSenderName(mail.from)}</h3>
                 <p>{`< ${mail.from} >`}</p>
             </section>
-            <p>{mail.body}</p>
+            <p className="mail-body">{mail.body}</p>
         </article>
     )
 }

@@ -1,13 +1,33 @@
 const { useEffect, useState } = React
+const { useNavigate } = ReactRouter
 
 export function MailFolderList({ onSetFilterBy, unreadMailsCount }) {
 
     const [selectedFolder, setSelectedFolder] = useState(null)
+    const navigate = useNavigate()
 
     function onSelectFolder(ev) {
         const folder = ev.target.value
         setSelectedFolder(folder)
         onSetFilterBy({ folder })
+
+        switch (folder) {
+            case 'inbox':
+                navigate('/mail/inbox')
+                break;
+            case 'starred':
+                navigate('/mail/starred')
+                break;
+            case 'sent':
+                navigate('/mail/sent')
+                break;
+            case 'drafts':
+                navigate('/mail/drafts')
+                break;
+            case 'trash':
+                navigate('/mail/trash')
+                break;
+        }
     }
 
     return (

@@ -1,16 +1,7 @@
-.mail-header {
-    display: flex;
-    justify-content: space-between;
-    min-height: 3em;
+.mail-details .mail-btns {
+    margin-block: 14px;
+    margin-inline-start: 16px;
 }
-
-.mail-header>* {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-}
-
-
 
 .mail-btns>* {
     border: none;
@@ -20,30 +11,48 @@
     font-size: 1em;
 }
 
-.left-header>*{
-    font-size: 2em;
-}
-
 .mail-btns>*:hover {
     cursor: pointer;
     border-radius: 50%;
     background-color: rgba(211, 211, 211, 0.313);
 }
 
-.sender-section{
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+.mail-details .mail-subject {
+    margin-inline-start: 72px;
+    margin-block: 20px;
 }
 
-.sender-section p{
+.mail-details .sender-section {
+    display: flex;
+    align-items: center;
+
+    font-size: 14px;
+}
+
+.sender-section p {
+    margin-inline-start: 0.5em;
     color: lightgray;
 }
 
-.mail-details {
-    margin: 1em;
+.mail-details .mail-body {
+    margin-inline-start: 72px;
+    margin-block-start: 1em;
 }
 
-.mail-details p{
-    margin: 1em;
+
+.sender-circle {
+    border-radius: 50%;
+    min-height: 40px;
+    min-width: 40px;
+
+    margin-inline: 16px;
+
+    line-height: 40px;
+    text-align: center;
+
+    font-weight: bold;
+    font-size: 1em;
+    background-color: purple;
+    color: white;
+
 }
