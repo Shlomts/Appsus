@@ -81,7 +81,7 @@ function query(filterBy = {}, sortBy = {}) {
 function get(noteId) {
     return storageService
         .get(NOTE_KEY, noteId)
-        .then((note) => _setNextPrevNoteId(note))
+        .then((note) => note)
 }
 
 function remove(noteId) {
@@ -169,18 +169,6 @@ function getFilterFromSearchParams(searchParams) {
     }
 }
 
-function _setNextPrevNoteId(note) {
-    return query().then((notes) => {
-        const noteIdx = notes.findIndex((currNote) => currNote.id === note.id)
-        const nextNote = notes[noteIdx + 1] ? notes[noteIdx + 1] : notes[0]
-        const prevNote = notes[noteIdx - 1]
-            ? notes[noteIdx - 1]
-            : notes[notes.length - 1]
-        note.nextNoteId = nextNote.id
-        note.prevNoteId = prevNote.id
-        return note
-    })
-}
 
 function debounce(func, delay) {
     let timeoutId

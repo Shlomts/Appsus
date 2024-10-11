@@ -1,11 +1,13 @@
-const { useEffect, useState } = React
+const { useEffect, useState, useRef } = React
 
 import { NoteList } from "../cmps/NoteList.jsx"
 import { NoteCompose } from "../cmps/NoteCompose.jsx"
+import { NoteEdit } from "../cmps/NoteEdit.jsx"
 import { noteService } from "../services/note.service.js"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
+    const [currNote, setCurrNote] = useState(null)
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
     const [sortBy, setSortBy] = useState({ createdAt: -1 })
 
@@ -16,7 +18,6 @@ export function NoteIndex() {
     useEffect(() => {
         loadNotes()
     }, [])
-    console.log(notes)
 
     function loadNotes() {
         noteService
@@ -27,8 +28,12 @@ export function NoteIndex() {
             })
     }
 
+    function onSelectNote(noteId) {
+        noteService.get(noteId).then((note) => setCurrNote(note))
+    }
+
     function onRemoveNote(noteId) {
-        // const note = notes.filter((notes) => notes.id === noteId)[0]
+        setCurrNote(null)        // const note = notes.filter((notes) => notes.id === noteId)[0]
 
         // ev.preventDefault()
 
@@ -48,10 +53,24 @@ export function NoteIndex() {
 
     return (
         <section className="note-index">
-            <NoteCompose loadNotes={loadNotes}/>
-            <NoteList 
-            notes={notes} 
-            onRemoveNote={onRemoveNote} />
+            <NoteCompose loadNotes={loadNotes} />
+            <NoteList
+                notes={notes}
+                onSelectNote={onSelectNote}
+                onRemoveNote={onRemoveNote}
+            />
+            {currNote && (
+                <NoteEdit
+                    className="edit-note"
+                    loadNotes={loadNotes}
+                    note={currNote}
+                    setCurrNote={setCurrNote}
+                />
+            )}
+
+            {/* <section className="edit-note">
+                <NoteCompose loadNotes={loadNotes} note={currNote} />
+            </section> */}
         </section>
     )
 }

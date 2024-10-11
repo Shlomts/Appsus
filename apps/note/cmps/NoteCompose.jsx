@@ -2,29 +2,27 @@ const { useState, useEffect } = React
 
 import { noteService } from "../services/note.service.js"
 
-export function NoteCompose({ loadNotes }) {
+export function NoteCompose({ loadNotes, note, setCurrNote }) {
     const [composeNote, setComposeNote] = useState(noteService.getEmptyNote())
-    const [body, setBody] = useState("")
     const [title, setTilte] = useState("")
+    const [body, setBody] = useState("")
 
-    // let body
-    // let title
-
-    // console.log("info:", info)
-    // console.log("txt", body)
+    console.log(note)
 
     useEffect(() => {
         loadNotes()
     }, [])
 
+    if (note && !title && !body) {
+        setTilte(note.info.title)
+        setBody(note.info.body)
+        setComposeNote(note)
+    }
+
     useEffect(() => {
         setTilte("")
         setBody("")
     }, [composeNote])
-    // console.log(composeNote)
-
-    // const [txt, setTxt] = useState('')
-    // const [title, setTilte] = useState('')
 
     function handleChange({ target }) {
         const field = target.name
@@ -51,8 +49,9 @@ export function NoteCompose({ loadNotes }) {
             })
             .finally(() => {
                 //             // navigate('/car')
-
-                loadNotes(), setComposeNote(noteService.getEmptyNote())
+                loadNotes()
+                setComposeNote(noteService.getEmptyNote())
+                setCurrNote(null)
             })
     }
 
