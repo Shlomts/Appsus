@@ -48,7 +48,7 @@ export function MailDetails() {
         navigate("/mail")
     }
 
-    if (!mail) return <h1>Loading...</h1>
+    if (!mail) return
 
     return (
         <article className="mail-details">

@@ -15,6 +15,7 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [sortBy, setSortBy] = useState({ createdAt: -1 })
     const [showForm, setShowForm] = useState(false)
+    const [showSideBar, setShowSideBar] = useState(false)
     const [unreadMailsCount, setUnreadMailsCount] = useState(0)
     const params = useParams()
     const mailId = params.mailId
@@ -84,23 +85,40 @@ export function MailIndex() {
         setUnreadMailsCount(newUnreadCount.length)
     }
 
-    if (!mails) return <h1>Loading...</h1>
+    function toggleSideBar() {
+        setShowSideBar((prevShowSideBar) => !prevShowSideBar)
+    }
+
+    if (!mails) return
 
     return (
         <section className="mail-index">
-            <button className="compose-btn" onClick={toggleComposeForm}>
-                <span className="fa-solid fa-pen"></span>
-                Compose</button>
-            {showForm && <MailCompose toggleComposeForm={toggleComposeForm} />}
+            <section className={`{left-col-layout ${showSideBar ? 'full' : 'collapsed'}`}>
+                <div className={`side-bar ${showSideBar ? 'open' : ''}`}>
+
+                    <button className={`compose-btn ${showSideBar ? '' : 'collapsed'}`}
+                        onClick={toggleComposeForm}>
+                        <span className="fa-solid fa-pen"></span>
+                        {showSideBar && <span>Compose</span>}
+                    </button>
+
+                    {showForm && <MailCompose toggleComposeForm={toggleComposeForm} />}
+                    <MailFolderList
+                        onSetFilterBy={onSetFilterBy}
+                        unreadMailsCount={unreadMailsCount}
+                        showSideBar={showSideBar}
+                    />
+                </div>
+            </section>
+
             <MailFilter
                 filterBy={filterBy}
                 onSetFilterBy={onSetFilterBy}
                 setSortBy={setSortBy}
+                showSideBar={showSideBar}
+                toggleSideBar={toggleSideBar}
             />
-            <MailFolderList
-                onSetFilterBy={onSetFilterBy}
-                unreadMailsCount={unreadMailsCount}
-            />
+
             {mailId ? (
                 <MailDetails
                     mailId={mailId}
