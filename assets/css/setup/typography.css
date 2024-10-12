@@ -7,3 +7,8 @@
     font-family: roboto-bold;
     src: url(/Appsus/assets/fonts/Roboto-Bold.ttf);
   }
+
+  @font-face {
+    font-family: roboto-thin;
+    src: url(/Appsus/assets/fonts/Roboto-Thin.ttf);
+  }

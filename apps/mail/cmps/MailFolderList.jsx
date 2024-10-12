@@ -1,15 +1,16 @@
 const { useEffect, useState } = React
 const { useNavigate } = ReactRouter
 
-export function MailFolderList({ onSetFilterBy, unreadMailsCount }) {
+export function MailFolderList({ onSetFilterBy, unreadMailsCount, showSideBar }) {
 
     const [selectedFolder, setSelectedFolder] = useState(null)
     const navigate = useNavigate()
 
-    function onSelectFolder(ev) {
-        const folder = ev.target.value
+    function onSelectFolder(folder) {
         setSelectedFolder(folder)
         onSetFilterBy({ folder })
+
+        console.log(`Selected folder: ${folder}`)
 
         switch (folder) {
             case 'inbox':
@@ -32,30 +33,40 @@ export function MailFolderList({ onSetFilterBy, unreadMailsCount }) {
 
     return (
         <nav className="mail-folder-list">
+
             <button className={selectedFolder === 'inbox' ? 'active' : ''}
-                onClick={onSelectFolder} value='inbox'>
+                onClick={() => onSelectFolder('inbox')}>
+                {/* onClick={onSelectFolder} value='inbox'> */}
                 <span className="fa-solid fa-inbox"></span>
-                Inbox ({unreadMailsCount})
+                {showSideBar && <span>Inbox ({unreadMailsCount})</span>}
             </button>
+
             <button className={selectedFolder === 'starred' ? 'active' : ''}
-                onClick={onSelectFolder} value='starred'>
+                onClick={() => onSelectFolder('starred')}>
+                {/* onClick={onSelectFolder} value='starred'> */}
                 <span className="fa-regular fa-star"></span>
-                Starred
+                {showSideBar && <span>Starred</span>}
             </button>
+
             <button className={selectedFolder === 'sent' ? 'active' : ''}
-                onClick={onSelectFolder} value='sent'>
+                onClick={() => onSelectFolder('sent')}>
+                {/* onClick={onSelectFolder} value='sent'> */}
                 <span className="fa-regular fa-paper-plane"></span>
-                Sent
+                {showSideBar && <span>Sent</span>}
             </button>
+
             <button className={selectedFolder === 'drafts' ? 'active' : ''}
-                onClick={onSelectFolder} value='drafts'>
+                onClick={() => onSelectFolder('drafts')}>
+                {/* onClick={onSelectFolder} value='drafts'> */}
                 <span className="fa-regular fa-file"></span>
-                Drafts
+                {showSideBar && <span>Drafts</span>}
             </button>
+
             <button className={selectedFolder === 'trash' ? 'active' : ''}
-                onClick={onSelectFolder} value='trash'>
+                onClick={() => onSelectFolder('trash')}>
+                {/* onClick={onSelectFolder} value='trash'> */}
                 <span className="fa-regular fa-trash-can"></span>
-                Trash
+                {showSideBar && <span>Trash</span>}
             </button>
         </nav>
     )

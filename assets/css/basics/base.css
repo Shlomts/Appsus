@@ -25,3 +25,12 @@ img {
     width: 100%;
     object-fit: cover;
 }
+
+
+.app{
+    display: flex;
+}
+
+.main-content{
+    flex-grow: 1;
+}

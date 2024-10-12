@@ -1,9 +1,8 @@
-
 const { Link, NavLink } = ReactRouterDOM
 const { useEffect, useState } = React
 
 
-export function AppHeader({ currentPath }) {
+export function AppNavigator() {
 
     const [appsWindow, setAppWindow] = useState(false)
 
@@ -15,23 +14,7 @@ export function AppHeader({ currentPath }) {
         setAppWindow(false)
     }
 
-    return <header className="app-header">
-        <Link to="/">
-            <h3>Appsus</h3>
-        </Link>
-
-        <nav>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
-        </nav>
-
-        <section className="curr-flter">
-            {currentPath === '/mail' && (
-                <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} setSortBy={setSortBy} />
-            )}
-
-        </section>
-
+    return <header className="app-navigator">
         <div className="app-btn">
             <button onClick={toggleAppsWindow} className="apps-btn fa-solid fa-grip"></button>
         </div>
