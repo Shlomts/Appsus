@@ -50,18 +50,20 @@ export function MailFilter({ filterBy, onSetFilterBy, setSortBy, toggleSideBar }
 
     return (
         <section className="mail-filter">
+
             <section className="gmail-logo">
                 <button onClick={toggleSideBar} className="hamburger fa-solid fa-bars">   </button>
                 <img src="https://img.icons8.com/color/48/gmail-new.png" alt="gmail-icon"></img>
                 <span>Mister Mail</span>
             </section>
+
             <form onSubmit={onSubmit}>
                 <button type="submit" className="fa-solid fa-magnifying-glass"></button>
                 <input value={filterByToEdit.txt} onChange={handleChange} type="text" name="txt" placeholder='Search mail' />
             </form>
 
-            <select name="isRead" value={filterByToEdit.isRead || ''} onChange={handleChange}>
-                <option value="">All</option>
+            <select className="isRead-filter" name="isRead" value={filterByToEdit.isRead || ''} onChange={handleChange}>
+                <option value="">Show All</option>
                 <option value="true">Read</option>
                 <option value="false">Unread</option>
             </select>
