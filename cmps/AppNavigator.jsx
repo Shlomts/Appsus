@@ -27,9 +27,9 @@ export function AppNavigator() {
                 <Link to="/note" onClick={closeAppWindow}>
                     <img src="https://img.icons8.com/color/48/google-keep.png" alt="gmail-keep-icon"></img>
                 </Link>
-                {/* <Link to="/mail"> */}
-                <img src="https://img.icons8.com/doodle/48/books.png" alt="miss-books-icon"></img>
-                {/* </Link> */}
+                <Link to="/book" onClick={closeAppWindow}>
+                    <img src="https://img.icons8.com/doodle/48/books.png" alt="miss-books-icon"></img>
+                </Link>
 
             </div>
         )}

@@ -1,0 +1,57 @@
+.book-filter>form {
+    /* display: flex; */
+    /* min-width: 10vw;
+    min-height: 45px;
+
+    margin-inline-start: 10px;
+
+    border-radius: 24px;
+    background-color: #eaf1fb; */
+}
+
+.book-filter>form button{
+    margin-inline-start: 2px;
+    background-color: transparent;
+    border: none;
+
+    color: #444746;
+}
+
+.book-filter>form input{
+    background-color: transparent;
+    border: none;
+
+    outline: none;
+    font-size: 1em;
+}
+
+/* .isRead-filter{
+    background-color: #d1e4ff;
+    width: 100px;
+    height: 45px;
+    border-radius: 24px;
+    border: none;
+    outline: none;
+    margin-inline-start: 0.5em;
+    padding-inline: 1em;
+}
+
+.mail-sort{
+    display: flex;
+    align-items: center;
+    background-color: #d1e4ff;
+    width: 60px;
+    height: 45px;
+
+    border-radius: 24px;
+
+    margin-inline-start: 0.5em;
+    padding-inline: 1em;
+}
+
+.mail-sort select{
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+} */

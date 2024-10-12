@@ -1,14 +1,19 @@
 @font-face {
-    font-family: roboto-regular;
-    src: url(/Appsus/assets/fonts/Roboto-Regular.ttf);
-  }
+  font-family: roboto-regular;
+  src: url(/Appsus/assets/fonts/Roboto-Regular.ttf);
+}
 
-  @font-face {
-    font-family: roboto-bold;
-    src: url(/Appsus/assets/fonts/Roboto-Bold.ttf);
-  }
+@font-face {
+  font-family: roboto-bold;
+  src: url(/Appsus/assets/fonts/Roboto-Bold.ttf);
+}
 
-  @font-face {
-    font-family: roboto-thin;
-    src: url(/Appsus/assets/fonts/Roboto-Thin.ttf);
-  }
+@font-face {
+  font-family: roboto-thin;
+  src: url(/Appsus/assets/fonts/Roboto-Thin.ttf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Maven+Pro:wght@400..900&display=swap");

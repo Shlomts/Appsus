@@ -1,0 +1,16 @@
+.img-container {
+    position: relative;
+    display: inline-block;
+}
+
+.book-image {
+    display: block;
+}
+
+.on-sale-icon {
+    width: 130px;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    z-index: 1;
+}
