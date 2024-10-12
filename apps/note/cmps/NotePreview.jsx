@@ -1,6 +1,7 @@
 export function NotePreview({ note, onSelectNote }) {
     return (
         <article
+            style={{ backgroundColor: note.style.backgroundColor }}
             className="note-preview"
             onClick={(ev) => {
                 ev.preventDefault()

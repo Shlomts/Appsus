@@ -1,13 +1,17 @@
 const { useState, useEffect } = React
 
 import { noteService } from "../services/note.service.js"
+import { ColorInput } from "../cmps/ColorInput.jsx"
 
 export function NoteCompose({ loadNotes, note, setCurrNote }) {
     const [composeNote, setComposeNote] = useState(noteService.getEmptyNote())
     const [title, setTilte] = useState("")
     const [body, setBody] = useState("")
 
-    console.log(note)
+    const [ showColorsPalette, setShowColorsPalette ] = useState(false)
+    const [backgroundColor, setBackgroundColor] = useState(
+        composeNote.style.backgroundColor
+    )
 
     useEffect(() => {
         loadNotes()
@@ -16,6 +20,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
     if (note && !title && !body) {
         setTilte(note.info.title)
         setBody(note.info.body)
+        setBackgroundColor(note.style.backgroundColor)
         setComposeNote(note)
     }
 
@@ -37,8 +42,20 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         })
     }
 
+    function onSetNoteStyle(color) {
+        setBackgroundColor(color)
+    }
+
+
+    function toggleColorsPallete(){
+        setShowColorsPalette((prevShowColorsPalette) => !prevShowColorsPalette)
+    }
+
     function onSaveNote(ev) {
         ev.preventDefault()
+        
+        composeNote.style.backgroundColor = backgroundColor
+        
         noteService
             .save(composeNote)
             .then((note) => {
@@ -49,14 +66,20 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
             })
             .finally(() => {
                 //             // navigate('/car')
+                if(showColorsPalette) toggleColorsPallete()
                 loadNotes()
                 setComposeNote(noteService.getEmptyNote())
                 setCurrNote(null)
+                setBackgroundColor('transparent')
             })
     }
 
     return (
-        <form onSubmit={onSaveNote} className="note-compose">
+        <form
+            style={{ backgroundColor: backgroundColor }}
+            onSubmit={onSaveNote}
+            className="note-compose"
+        >
             {/* <header className="header">
                     <h2>New Note</h2>
                     <button
@@ -86,6 +109,9 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
                     placeholder="New note..."
                 ></input>
             </label>
+
+            <ColorInput showColorsPalette={showColorsPalette} toggleColorsPallete={toggleColorsPallete} onSetNoteStyle={onSetNoteStyle} />
+
             <button>Save</button>
             {/* <button
                         className="fa-regular fa-trash-can"

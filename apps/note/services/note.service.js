@@ -134,7 +134,7 @@ function getEmptyNote(title = " " ,body = " ") {
         type: "txt",
         isPinned: false,
         style: {
-            backgroundColor: "#00d",
+            backgroundColor: 'transparent',
         },
         info: {
             title,

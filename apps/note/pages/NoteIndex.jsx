@@ -53,7 +53,7 @@ export function NoteIndex() {
 
     return (
         <section className="note-index">
-            <NoteCompose loadNotes={loadNotes} />
+            <NoteCompose loadNotes={loadNotes} setCurrNote={setCurrNote}/>
             <NoteList
                 notes={notes}
                 onSelectNote={onSelectNote}

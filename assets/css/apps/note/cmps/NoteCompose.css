@@ -1,7 +1,17 @@
  /* note compose */
  
 .note-compose{
-    /* background-color: aquamarine; */
-
+    background-color: transparent;
     text-align: center;
+    padding: 10px;
+}
+
+input{
+    background-color: transparent;
+    border: none;
+    color: #0099ff;
+}
+
+input::placeholder{
+    color: #0099ff;
 }
