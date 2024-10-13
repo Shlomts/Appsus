@@ -28,6 +28,8 @@
 .mail-details,
 .mail-list {
     height: 100%;
+    margin-block-start: 3.75em;
+
     border-radius: 20px;
     background-color: #ffffff;
 }
@@ -38,7 +40,7 @@
 
 .left-col-layout.full {
     width: 250px;
-}   
+}
 
 .side-bar {
     display: flex;
@@ -53,40 +55,6 @@
 
 .side-bar.open {
     width: 200px;
-}
-
-.hamburger {
-    padding: 0.5em;
-    margin-inline-start: 10px;
-    font-size: 1em;
-
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-}
-
-.hamburger:hover {
-    cursor: pointer;
-    background-color: rgba(211, 211, 211, 0.313);
-}
-
-.gmail-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-
-    font-size: 1.2em;
-}
-
-.gmail-logo>span {
-    font-family: 'roboto-regular', sans-serif;
-    color: #444746;
-}
-
-.gmail-logo img {
-    width: 35px;
-    height: 35px;
-    object-fit: contain;
 }
 
 .compose-btn {
@@ -121,4 +89,58 @@
 
 .compose-btn span {
     margin-inline-end: 8px;
+}
+
+
+.mail-loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60%
+}
+
+.mail-loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+}
+
+.mail-loader::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #0d0d0d;
+    animation: prixClipFix 2s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+    }
 }

@@ -89,7 +89,11 @@ export function MailIndex() {
         setShowSideBar((prevShowSideBar) => !prevShowSideBar)
     }
 
-    if (!mails) return
+    if (!mails) {
+        return (<div className="mail-loader-container">
+            <div className="mail-loader"></div>
+        </div>)
+    }
 
     return (
         <section className="mail-index">

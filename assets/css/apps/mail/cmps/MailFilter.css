@@ -1,69 +1,104 @@
 .mail-filter {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
-    justify-content: space-between;
-    margin-block-start: 6px;
+    gap: 8px;
 
-
-    max-height: 5vh;
-    max-width: 100vw;
+    padding: 8px 16px;
 }
 
-.mail-filter>form {
+.filter-header {
     display: flex;
-    min-width: 50vw;
-    min-height: 45px;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+}
 
-    margin-inline-start: 83px;
-
+.filter-header form{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
     border-radius: 24px;
+    
     background-color: #eaf1fb;
 }
 
-.mail-filter>form button{
-    margin-inline-start: 6px;
+.filter-header form button{
     background-color: transparent;
     border: none;
+    padding: 0 0.5em;
 
+    font-size: 1em;
     color: #444746;
 }
 
-.mail-filter>form input{
+.filter-header form input{
+    flex-grow: 1;
     background-color: transparent;
     border: none;
 
     outline: none;
     font-size: 1em;
+    padding: 0.5em;
 }
 
-.isRead-filter{
-    background-color: #d1e4ff;
-    width: 100px;
-    height: 45px;
+.filters{
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    gap: 1em;
+    width: 100%;
+    max-width: 590px;
+    margin-block-start: 1em;
+}
+
+.isRead-filter,
+.sort-by-filter{
+    height: 35px;
     border-radius: 24px;
     border: none;
     outline: none;
-    margin-inline-start: 0.5em;
     padding-inline: 1em;
-}
 
-.mail-sort{
-    display: flex;
-    align-items: center;
     background-color: #d1e4ff;
-    width: 60px;
-    height: 45px;
-
-    border-radius: 24px;
-
-    margin-inline-start: 0.5em;
-    padding-inline: 1em;
 }
 
-.mail-sort select{
-
+.mail-sort select {
     border: none;
     outline: none;
     background-color: transparent;
+}
+
+.hamburger {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+
+    font-size: 1em;
+}
+
+.hamburger:hover {
+    cursor: pointer;
+    background-color: rgba(211, 211, 211, 0.313);
+}
+
+.gmail-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    font-size: 1.2em;
+}
+
+.gmail-logo>span {
+    font-family: 'roboto-regular', sans-serif;
+    color: #444746;
+}
+
+.gmail-logo img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
 }
