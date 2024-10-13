@@ -17,6 +17,7 @@ export function AppNavigator() {
     return <header className="app-navigator">
         <div className="app-btn">
             <button onClick={toggleAppsWindow} className="apps-btn fa-solid fa-grip"></button>
+
         </div>
 
         {appsWindow && (
@@ -27,9 +28,9 @@ export function AppNavigator() {
                 <Link to="/note" onClick={closeAppWindow}>
                     <img src="https://img.icons8.com/color/48/google-keep.png" alt="gmail-keep-icon"></img>
                 </Link>
-                <Link to="/book" onClick={closeAppWindow}>
+                {/* <Link to="/book" onClick={closeAppWindow}>
                     <img src="https://img.icons8.com/doodle/48/books.png" alt="miss-books-icon"></img>
-                </Link>
+                </Link> */}
 
             </div>
         )}

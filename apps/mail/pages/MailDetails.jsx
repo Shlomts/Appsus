@@ -48,8 +48,11 @@ export function MailDetails() {
         navigate("/mail")
     }
 
-    if (!mail) return
-
+    if (!mail) {
+        return (<div className="mail-loader-container">
+            <div className="mail-loader"></div>
+        </div>)
+    }
     return (
         <article className="mail-details">
             <section className="mail-btns">
@@ -58,10 +61,10 @@ export function MailDetails() {
                     className="fa-solid fa-arrow-left"
                     onClick={onBack}
                 ></button>
-                <button
+                {/* <button
                     title="save as note"
                     className="fa-solid fa-paper-plane"
-                ></button>
+                ></button> */}
                 <button
                     title="delete"
                     className="fa-regular fa-trash-can"
