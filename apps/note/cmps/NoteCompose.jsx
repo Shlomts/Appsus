@@ -8,7 +8,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
     const [title, setTilte] = useState("")
     const [body, setBody] = useState("")
 
-    const [ showColorsPalette, setShowColorsPalette ] = useState(false)
+    const [showColorsPalette, setShowColorsPalette] = useState(false)
     const [backgroundColor, setBackgroundColor] = useState(
         composeNote.style.backgroundColor
     )
@@ -46,16 +46,15 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         setBackgroundColor(color)
     }
 
-
-    function toggleColorsPallete(){
+    function toggleColorsPallete() {
         setShowColorsPalette((prevShowColorsPalette) => !prevShowColorsPalette)
     }
 
     function onSaveNote(ev) {
         ev.preventDefault()
-        
+
         composeNote.style.backgroundColor = backgroundColor
-        
+
         noteService
             .save(composeNote)
             .then((note) => {
@@ -66,11 +65,11 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
             })
             .finally(() => {
                 //             // navigate('/car')
-                if(showColorsPalette) toggleColorsPallete()
+                if (showColorsPalette) toggleColorsPallete()
                 loadNotes()
                 setComposeNote(noteService.getEmptyNote())
                 setCurrNote(null)
-                setBackgroundColor('transparent')
+                setBackgroundColor("transparent")
             })
     }
 
@@ -110,9 +109,16 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
                 ></input>
             </label>
 
-            <ColorInput showColorsPalette={showColorsPalette} toggleColorsPallete={toggleColorsPallete} onSetNoteStyle={onSetNoteStyle} />
+            <section className="tool-bar">
+                <ColorInput
+                    showColorsPalette={showColorsPalette}
+                    toggleColorsPallete={toggleColorsPallete}
+                    onSetNoteStyle={onSetNoteStyle}
+                />
 
-            <button>Save</button>
+                <button>Save</button>
+            </section>
+
             {/* <button
                         className="fa-regular fa-trash-can"
                         onClick={(ev) => {

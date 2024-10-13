@@ -1,0 +1,32 @@
+
+.colors-container {
+    position: fixed;
+    display: flex;
+    width: max-content;
+    text-align: start;
+    background-color: white;
+    border-radius: 10px;
+    padding: 7px;
+    gap: 3px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.colors-container .item {
+    display: flex;
+    border: 0.5px lightgrey dotted;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+}
+
+.colors-container .item:hover {
+    border: 3px black;
+}
+
+.colors-container .item .chosen {
+    border-color: blueviolet;
+}

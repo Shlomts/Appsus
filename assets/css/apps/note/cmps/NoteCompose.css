@@ -6,12 +6,19 @@
     padding: 10px;
 }
 
-input{
+.note-compose input{
     background-color: transparent;
     border: none;
-    color: #0099ff;
+    color: black;
 }
 
-input::placeholder{
-    color: #0099ff;
+.note-compose input::placeholder{
+    color: gray;
+}
+
+.tool-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
 }

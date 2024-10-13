@@ -4,6 +4,7 @@ const { useState } = React
 export function ColorInput({ showColorsPalette, toggleColorsPallete, onSetNoteStyle, backgroundColor }) {
     
     const colors = [
+        "transparent", //Default
         "#f39f76", //coral
         "#faafa8", //peach
         "#fff8b8", //sand
@@ -37,7 +38,6 @@ export function ColorInput({ showColorsPalette, toggleColorsPallete, onSetNoteSt
                         style={{ backgroundColor: color }}
                         onClick={() => onSetColor(color)}
                     >
-                        a
                     </div>
                 ))}
             </div>
