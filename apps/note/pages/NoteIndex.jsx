@@ -4,12 +4,16 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { NoteCompose } from "../cmps/NoteCompose.jsx"
 import { NoteEdit } from "../cmps/NoteEdit.jsx"
 import { noteService } from "../services/note.service.js"
+import { NoteFilter } from "../cmps/NoteFilter.jsx"
+import { NoteFolderList } from "../cmps/NoteFolderList.jsx"
+
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
     const [currNote, setCurrNote] = useState(null)
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
     const [sortBy, setSortBy] = useState({ createdAt: -1 })
+    const [showSideBar, setShowSideBar] = useState(false)
 
     // useEffect(() => {
     //     loadNotes()
@@ -49,16 +53,31 @@ export function NoteIndex() {
             })
     }
 
+
+    function toggleSideBar() {
+        setShowSideBar((prevShowSideBar) => !prevShowSideBar)
+    }
+
+
     if (!notes) return <h1>Loading...</h1>
 
     return (
         <section className="note-index">
-            <NoteCompose loadNotes={loadNotes} setCurrNote={setCurrNote}/>
+            <NoteFolderList />
+
+            <NoteCompose loadNotes={loadNotes} setCurrNote={setCurrNote} />
+
+            <NoteFilter
+                showSideBar={showSideBar}
+                toggleSideBar={toggleSideBar}
+            />
+
             <NoteList
                 notes={notes}
                 onSelectNote={onSelectNote}
                 onRemoveNote={onRemoveNote}
             />
+
             {currNote && (
                 <NoteEdit
                     className="edit-note"

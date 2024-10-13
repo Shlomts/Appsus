@@ -1,0 +1,36 @@
+.note-index {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 6vh 9vh 100vh;
+
+    justify-content: center;
+
+    /* padding: 8px 0; */
+    /* background-color: var(--main-bg-color); */
+}
+
+.note-filter {
+    grid-column: 1/3;
+    grid-row: 1/2;
+
+    background-color: aquamarine;
+}
+
+.note-compose {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.note-list {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    background-color: cadetblue;
+    /* border-radius: 20px;
+    background-color: white; */
+}
+
+.note-folder-list {
+    grid-column: 1/2;
+    grid-row: 2/4;
+    background-color: orange;
+}
