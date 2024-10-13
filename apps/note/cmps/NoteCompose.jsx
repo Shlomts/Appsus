@@ -58,7 +58,6 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         noteService
             .save(composeNote)
             .then((note) => {
-                console.log("nte", note)
             })
             .catch((err) => {
                 console.log("err:", err)
