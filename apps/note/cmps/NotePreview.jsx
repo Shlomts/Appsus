@@ -18,7 +18,6 @@ export function NotePreview({ note, onSelectNote }) {
 }
 
 function DynamicCmp({ note }) {
-    // console.log('props:', props)
     switch (note.type) {
         case "txt":
             return <p>{note.info.body}</p>
