@@ -1,6 +1,4 @@
-// import { utilService } from "../services/util.service.js"
 const { useEffect, useState } = React
-// import iconGmail from "../../../assets/img/icon-gmail.png"
 
 export function MailFilter({ filterBy, onSetFilterBy, setSortBy, toggleSideBar }) {
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })

@@ -19,6 +19,8 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         composeNote.style.backgroundColor
     )
 
+    const [isExpended, setIsExpended] = useState(false)
+
     useEffect(() => {
         loadNotes()
     }, [])
@@ -65,10 +67,10 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         setShowColorsPalette((prevShowColorsPalette) => !prevShowColorsPalette)
     }
 
-    function onDuplicateNote(){
+    function onDuplicateNote() {
         composeNote.id = null
     }
-    
+
     function onPinNote(ev) {
         ev.preventDefault()
         setCurrIsPinned((prevPin) => !prevPin)
@@ -83,7 +85,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
 
         noteService
             .save(composeNote)
-            .then((note) => {})
+            .then((note) => { })
             .catch((err) => {
                 console.log("err:", err)
             })
@@ -96,93 +98,79 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
                 setBackgroundColor("transparent")
                 setCurrCmpType("txt")
                 setPlaceholderMsg("What's on your mind?")
+                setIsExpended(false)
             })
     }
 
     return (
-        <Fragment>
-            <form
-                style={{ backgroundColor: backgroundColor }}
-                onSubmit={onSaveNote}
-                className="note-compose"
-            >
-                {/* <header className="header">
-                    <h2>New Note</h2>
-                    <button
-                        onClick={(ev) => {
-                            ev.preventDefault
-                            onDraft()
-                            toggleComposeForm()
-                        }}
-                        className="fa-solid fa-xmark"
-                    ></button>
-                </header> */}
-                <label htmlFor="title">
-                    <input
-                        value={title}
-                        onChange={handleChange}
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                    ></input>
-                </label>
-                <label htmlFor="txt">
-                    <input
-                        value={body}
-                        onChange={handleChange}
-                        type="text"
-                        name="body"
-                        placeholder={placeholderMsg}
-                    ></input>
-                </label>
+        <div className={`note-compose ${isExpended ? 'expended' : 'compact'}`} style={{ backgroundColor }}>
+            {
+                isExpended ? (
+                    <form
+                        onSubmit={onSaveNote}>
+                        <input
+                            value={title}
+                            onChange={handleChange}
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                        />
 
-                <section className="tool-bar">
-                    <ColorInput
-                        showColorsPalette={showColorsPalette}
-                        toggleColorsPallete={toggleColorsPallete}
-                        onSetNoteStyle={onSetNoteStyle}
-                    />
-                    <button onClick={onPinNote} className="fa-solid fa-thumbtack"></button>
-                    <button>Save</button>
-                </section>
+                        <input
+                            value={body}
+                            onChange={handleChange}
+                            type="text"
+                            name="body"
+                            placeholder={placeholderMsg}
+                        />
 
-                {/* <button
-                        className="fa-regular fa-trash-can"
-                        onClick={(ev) => {
-                            ev.preventDefault
-                            toggleComposeForm()
-                        }}
-                    ></button> */}
-            </form>
+                        <div className="compose-actions">
+                            <section className="tool-bar">
+                                <ColorInput
+                                    showColorsPalette={showColorsPalette}
+                                    toggleColorsPallete={toggleColorsPallete}
+                                    onSetNoteStyle={onSetNoteStyle}
+                                />
+                                <button onClick={onPinNote} className="fa-solid fa-thumbtack"></button>
+                                { note && (
+            <button onClick={onDuplicateNote} className="fa-regular fa-copy"></button>
+        )
+}
+                                <button type="submmit">Save</button>
+                                <button onClick={() => setIsExpended(false)}>Cancel</button>
 
-            {note && (
-                <button onClick={onDuplicateNote} className="fa-regular fa-copy"></button>
-            )}
-            {!note && (
-                <section className="cmpTypeOpts">
-                    <button
-                        onClick={onChangeCmpType}
-                        value="txt"
-                        className="fa-solid fa-font"
-                    />
-                    <button
-                        onClick={onChangeCmpType}
-                        value="img"
-                        className="fa-regular fa-image"
-                    />
-                    <button
-                        onClick={onChangeCmpType}
-                        value="video"
-                        className="fa-brands fa-youtube"
-                    />
-                    <button
-                        onClick={onChangeCmpType}
-                        value="todos"
-                        className="fa-regular fa-square-check"
-                    />
-                </section>
-            )}
-        </Fragment>
+                            </section>
+                        </div>
+                    </form>
+                ) : (
+                    <div className="compact-compose" onClick={() => setIsExpended(true)}>
+                        <p>New note...</p>
+                        <section className="cmpTypeOpts">
+                            <button
+                                onClick={onChangeCmpType}
+                                value="txt"
+                                className="fa-solid fa-font"
+                            />
+                            <button
+                                onClick={onChangeCmpType}
+                                value="img"
+                                className="fa-regular fa-image"
+                            />
+                            <button
+                                onClick={onChangeCmpType}
+                                value="video"
+                                className="fa-brands fa-youtube"
+                            />
+                            <button
+                                onClick={onChangeCmpType}
+                                value="todos"
+                                className="fa-regular fa-square-check"
+                            />
+                        </section>
+                    </div>
+                )
+            }
+        </div >
     )
 }
 

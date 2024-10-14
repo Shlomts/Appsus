@@ -1,19 +1,63 @@
- /* note compose */
- 
-.note-compose{
-    background-color: transparent;
-    text-align: center;
-    padding: 10px;
+.note-compose {
+    display: flex;
+    flex-direction: column;
+    padding-block: 1em;
+
+    transition: all 0.3s ease;
+
+    margin-block-start: 2em;
+    border-radius: 10px;
+    box-shadow: 0px 1px 8px 6px rgba(230, 230, 230, 1);
 }
 
-.note-compose input{
-    background-color: transparent;
+.note-compose.expended {
+    width: 600px;
+    height: 100px;
+    align-items: center;
+}
+
+.note-compose.expended form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.note-compose.compact {
+    display: flex;
+    justify-content: space-between;
+
+    height: 30px;
+    width: 600px;
+}
+
+.compact-compose {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.compact-compose p {
+    padding-inline-start: 1em;
+    align-self: center;
+
+}
+
+.note-compose input {
+    padding-inline-start: 1em;
     border: none;
+    width: 500px;
+
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+
     color: black;
-    min-width: 200px;
+    background-color: transparent;
+
 }
 
-.note-compose input::placeholder{
+.note-compose input::placeholder {
     color: gray;
 }
 
@@ -24,8 +68,18 @@
     padding: 10px;
 }
 
-.cmpTypeOpts button{
+.cmpTypeOpts button {
     background-color: transparent;
     border: 0;
-    padding: 0 10px 30px;
+    cursor: pointer;
+
+}
+
+.compose-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    width: 100%;
 }
