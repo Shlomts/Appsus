@@ -62,6 +62,10 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         setShowColorsPalette((prevShowColorsPalette) => !prevShowColorsPalette)
     }
 
+    function onDuplicateNote(){
+        composeNote.id = null
+    }
+
     function onSaveNote(ev) {
         ev.preventDefault()
 
@@ -140,6 +144,10 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
                         }}
                     ></button> */}
             </form>
+
+            {note && (
+                <button onClick={onDuplicateNote} className="fa-regular fa-copy"></button>
+            )}
             {!note && (
                 <section className="cmpTypeOpts">
                     <button
