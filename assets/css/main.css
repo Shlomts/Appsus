@@ -46,6 +46,8 @@
 @import './apps/note/cmps/NoteFolderList.css';
 @import './apps/note/cmps/NoteFilter.css';
 
+@import './apps/note/cmps/Video.css';
+@import './apps/note/cmps/Todos.css';
 
 /* Book App */
 @import './apps/books/bookLayout.css';

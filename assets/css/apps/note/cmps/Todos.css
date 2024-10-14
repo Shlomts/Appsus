@@ -1,0 +1,14 @@
+.todo{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+
+.todo button{
+    background-color: transparent;
+    border: 0;
+}
+
+.todo p {
+    text-align: start;
+    padding-inline-start: 0.2em;
+}
