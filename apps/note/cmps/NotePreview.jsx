@@ -1,5 +1,5 @@
-import  { Video } from "./dynamic-inputs/Video.jsx"
-import  { Todos } from "./dynamic-inputs/Todos.jsx"
+import { Video } from "./dynamic-inputs/Video.jsx"
+import { Todos } from "./dynamic-inputs/Todos.jsx"
 
 export function NotePreview({ note, onSelectNote }) {
     return (
@@ -12,6 +12,7 @@ export function NotePreview({ note, onSelectNote }) {
             }}
         >
             <h3>{note.info.title}</h3>
+            {note.isPinned && <button className="fa-solid fa-thumbtack"></button>}
             <DynamicCmp note={note} />
         </article>
     )
@@ -22,7 +23,7 @@ function DynamicCmp({ note }) {
         case "txt":
             return <p>{note.info.body}</p>
         case "img":
-            return <img src={note.info.body}/>
+            return <img src={note.info.body} />
         case "video":
             return <Video videoUrl={note.info.body} />
         case "todos":

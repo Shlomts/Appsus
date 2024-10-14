@@ -12,6 +12,8 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
     const [currCmpType, setCurrCmpType] = useState("txt")
     const [placeholderMsg, setPlaceholderMsg] = useState("What's on your mind?")
 
+    const [currIsPinned, setCurrIsPinned] = useState(false)
+
     const [showColorsPalette, setShowColorsPalette] = useState(false)
     const [backgroundColor, setBackgroundColor] = useState(
         composeNote.style.backgroundColor
@@ -26,6 +28,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         setBody(note.info.body)
         setBackgroundColor(note.style.backgroundColor)
         setCurrCmpType(note.type)
+        setCurrIsPinned(note.isPinned)
         setComposeNote(note)
     }
 
@@ -65,12 +68,18 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
     function onDuplicateNote(){
         composeNote.id = null
     }
+    
+    function onPinNote(ev) {
+        ev.preventDefault()
+        setCurrIsPinned((prevPin) => !prevPin)
+    }
 
     function onSaveNote(ev) {
         ev.preventDefault()
 
         composeNote.style.backgroundColor = backgroundColor
         composeNote.type = currCmpType
+        composeNote.isPinned = currIsPinned
 
         noteService
             .save(composeNote)
@@ -133,6 +142,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
                         toggleColorsPallete={toggleColorsPallete}
                         onSetNoteStyle={onSetNoteStyle}
                     />
+                    <button onClick={onPinNote} className="fa-solid fa-thumbtack"></button>
                     <button>Save</button>
                 </section>
 

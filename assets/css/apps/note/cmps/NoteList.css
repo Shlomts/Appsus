@@ -1,13 +1,31 @@
  /* note list */
 
  .note-list{
+   display: block;
     /* background-color: #e32828; */
-    columns: 4;
-    column-gap: 20px;
+    /* columns: 4;
+    column-gap: 20px; */
     /* display: table-column; */
  }
 
  .note{
     break-inside: avoid;
-
  }
+ 
+ .note-list>*{
+   columns: 4;
+   column-gap: 20px;
+   padding-bottom: 10vh;
+ }
+ 
+ /* .pinned{
+   columns: 4;
+   column-gap: 20px;
+   padding-bottom: 10vh;
+ }
+
+ .not-pinned{
+   display: flex;
+   columns: 4;
+
+ } */
