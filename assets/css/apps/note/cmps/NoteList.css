@@ -14,8 +14,8 @@
  
  .note-list>*{
    columns: 4;
-   column-gap: 20px;
-   padding-bottom: 10vh;
+   column-gap: 50px;
+   padding-bottom: 20vh;
  }
  
  /* .pinned{

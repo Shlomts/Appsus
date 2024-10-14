@@ -32,6 +32,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
         setCurrCmpType(note.type)
         setCurrIsPinned(note.isPinned)
         setComposeNote(note)
+        setIsExpended(true)
     }
 
     useEffect(() => {
@@ -85,7 +86,7 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
 
         noteService
             .save(composeNote)
-            .then((note) => { })
+            .then((note) => {})
             .catch((err) => {
                 console.log("err:", err)
             })
@@ -103,74 +104,83 @@ export function NoteCompose({ loadNotes, note, setCurrNote }) {
     }
 
     return (
-        <div className={`note-compose ${isExpended ? 'expended' : 'compact'}`} style={{ backgroundColor }}>
-            {
-                isExpended ? (
-                    <form
-                        onSubmit={onSaveNote}>
-                        <input
-                            value={title}
-                            onChange={handleChange}
-                            type="text"
-                            name="title"
-                            placeholder="Title"
-                        />
+        <div
+            className={`note-compose ${isExpended ? "expended" : "compact"}`}
+            style={{ backgroundColor }}
+        >
+            {isExpended ? (
+                <form onSubmit={onSaveNote}>
+                    <input
+                        value={title}
+                        onChange={handleChange}
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                    />
 
-                        <input
-                            value={body}
-                            onChange={handleChange}
-                            type="text"
-                            name="body"
-                            placeholder={placeholderMsg}
-                        />
+                    <input
+                        value={body}
+                        onChange={handleChange}
+                        type="text"
+                        name="body"
+                        placeholder={placeholderMsg}
+                    />
 
-                        <div className="compose-actions">
-                            <section className="tool-bar">
-                                <ColorInput
-                                    showColorsPalette={showColorsPalette}
-                                    toggleColorsPallete={toggleColorsPallete}
-                                    onSetNoteStyle={onSetNoteStyle}
-                                />
-                                <button onClick={onPinNote} className="fa-solid fa-thumbtack"></button>
-                                { note && (
-            <button onClick={onDuplicateNote} className="fa-regular fa-copy"></button>
-        )
-}
-                                <button type="submmit">Save</button>
-                                <button onClick={() => setIsExpended(false)}>Cancel</button>
-
-                            </section>
-                        </div>
-                    </form>
-                ) : (
-                    <div className="compact-compose" onClick={() => setIsExpended(true)}>
-                        <p>New note...</p>
-                        <section className="cmpTypeOpts">
-                            <button
-                                onClick={onChangeCmpType}
-                                value="txt"
-                                className="fa-solid fa-font"
+                    <div className="compose-actions">
+                        <section className="tool-bar">
+                            <ColorInput
+                                showColorsPalette={showColorsPalette}
+                                toggleColorsPallete={toggleColorsPallete}
+                                onSetNoteStyle={onSetNoteStyle}
                             />
                             <button
-                                onClick={onChangeCmpType}
-                                value="img"
-                                className="fa-regular fa-image"
-                            />
-                            <button
-                                onClick={onChangeCmpType}
-                                value="video"
-                                className="fa-brands fa-youtube"
-                            />
-                            <button
-                                onClick={onChangeCmpType}
-                                value="todos"
-                                className="fa-regular fa-square-check"
-                            />
+                                onClick={onPinNote}
+                                className="fa-solid fa-thumbtack"
+                            ></button>
+                            {note && (
+                                <button
+                                    onClick={onDuplicateNote}
+                                    className="fa-regular fa-copy"
+                                ></button>
+                            )}
+                            <button className="fa-regular fa-floppy-disk" type="submmit"/>
+                            {!note && (
+                                <button className="fa-regular fa-trash-can" onClick={() => setIsExpended(false)}/>
+                            )}
                         </section>
                     </div>
-                )
-            }
-        </div >
+                </form>
+            ) : (
+                <div
+                    className="compact-compose"
+                    onClick={() => setIsExpended(true)}
+                >
+                    <p>New note...</p>
+                    <section className="cmpTypeOpts">
+                        <button
+                            onClick={onChangeCmpType}
+                            value="txt"
+                            className="fa-solid fa-font"
+                        />
+                        <button
+                            onClick={onChangeCmpType}
+                            value="img"
+                            className="fa-regular fa-image"
+                        />
+                        <button
+                            onClick={onChangeCmpType}
+                            value="video"
+                            className="fa-brands fa-youtube"
+                        />
+                        <button
+                            onClick={onChangeCmpType}
+                            value="todos"
+                            className="fa-regular fa-square-check"
+                        />
+                    </section>
+                </div>
+            )}
+        </div>
     )
 }
 

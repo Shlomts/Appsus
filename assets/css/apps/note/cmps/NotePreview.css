@@ -2,7 +2,22 @@
 
 
  .note-preview{
-    /* background-color: greenyellow; */
-    min-height: 200px;
-    /* display: inline; */
+    min-height: fit-content;
+    text-align: right;
+    margin-bottom: 10vh;
+
+    border-radius: 10px;
+    box-shadow: 0px 1px 8px 6px rgba(230, 230, 230, 1);
+    padding: 30px;
+ }
+
+ .note-preview >* >*{
+   padding-bottom: 20px;
+ }
+
+ .note-preview h3 {
+   font-size: 2em;
+ }
+ .note-body{
+   text-align: left;
  }

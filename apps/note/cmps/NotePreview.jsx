@@ -1,19 +1,27 @@
 import { Video } from "./dynamic-inputs/Video.jsx"
 import { Todos } from "./dynamic-inputs/Todos.jsx"
 
-export function NotePreview({ note, onSelectNote }) {
+export function NotePreview({ note, onSelectNote, onRemoveNote }) {
     return (
         <article
             style={{ backgroundColor: note.style.backgroundColor }}
             className="note-preview"
-            onClick={(ev) => {
-                ev.preventDefault()
-                onSelectNote(note.id)
-            }}
         >
-            <h3>{note.info.title}</h3>
-            {note.isPinned && <button className="fa-solid fa-thumbtack"></button>}
-            <DynamicCmp note={note} />
+            <section
+                className="note-body"
+                onClick={(ev) => {
+                    ev.preventDefault()
+                    onSelectNote(note.id)
+                }}
+            >
+                <h3>{note.info.title}</h3>
+                {note.isPinned && (
+                    <button className="fa-solid fa-thumbtack"></button>
+                )}
+                <DynamicCmp note={note} />
+            </section>
+
+            <button onClick={() => onRemoveNote(note.id)} className="fa-regular fa-trash-can"/>
         </article>
     )
 }
