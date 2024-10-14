@@ -2,7 +2,20 @@
 const { useState } = React
 
 export function ColorInput({ showColorsPalette, toggleColorsPallete, onSetNoteStyle, backgroundColor }) {
-    
+    const colorNames = {
+        "transparent": "Default",
+        "#f39f76": "coral",
+        "#faafa8": "peach",
+        "#fff8b8": "sand",
+        "#e2f6d3": "mint",
+        "#b4ddd3": "sage",
+        "#d4e4ed": "fog",
+        "#aeccdc": "storm",
+        "#d3bfdb": "dusk",
+        "#f6e2dd": "blossom",
+        "#e9e3d4": "clay",
+        "#efeff1": "chalk"
+    }
     const colors = [
         "transparent", //Default
         "#f39f76", //coral
@@ -32,6 +45,7 @@ export function ColorInput({ showColorsPalette, toggleColorsPallete, onSetNoteSt
                 {colors.map((color) => (
                     <div
                         key={color}
+                        title={colorNames[color]}
                         className={`item ${
                             color === backgroundColor ? "chosen" : ""
                         }`}

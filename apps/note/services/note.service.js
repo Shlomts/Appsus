@@ -156,6 +156,7 @@ function _createNote(title, txt, type = "txt") {
     const note = getEmptyNote(title, txt)
     note.id = utilService.makeId()
     note.type = type
+    note.style.backgroundColor = getRandomNoteColor()
     return note
 }
 
@@ -200,6 +201,27 @@ function getFilterFromSearchParams(searchParams) {
     }
 }
 
+function getRandomNoteColor(){
+    const colors = [
+        "transparent", //Default
+        "#f39f76", //coral
+        "#faafa8", //peach
+        "#fff8b8", //sand
+        "#e2f6d3", //mint
+        "#b4ddd3", //sage
+        "#d4e4ed", //fog
+        "#aeccdc", //storm
+        "#d3bfdb", //dusk
+        "#f6e2dd", //blossom
+        "#e9e3d4", //clay
+        "#efeff1", //chalk
+    ]
+
+    let num = utilService.getRandomIntInclusive(0, colors.length-1)
+
+    return colors[num]
+}
+
 function debounce(func, delay) {
     let timeoutId
     return (...args) => {
@@ -209,3 +231,4 @@ function debounce(func, delay) {
         }, delay)
     }
 }
+
